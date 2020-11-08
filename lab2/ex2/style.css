@@ -1,0 +1,33 @@
+body {
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    margin: 2%;
+}
+.pic {
+    margin: 1%;
+    padding: 3px;
+    border: 1px solid grey;
+    background-color: #e4ebe1;
+}
+.pic p {
+    text-align: center;
+    font-weight: bold;;
+}
+
+img {
+    width: 100%;
+    height: auto;
+    display: block; 
+}
+@media (max-width: 940px) {
+    body {
+        grid-template-columns: 50% 50%;
+    }
+}
+@media (max-width: 768px) {
+    body {
+        grid-template-columns: 100%;
+    }
+}
+
+

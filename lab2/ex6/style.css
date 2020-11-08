@@ -1,0 +1,63 @@
+body {
+    margin: 5%;
+    width: 100%;
+    height: auto;
+}
+
+.content {
+    position: relative;
+    height: 400px;
+    width: 400px;
+    top: 30%;
+    left: 30%;
+    animation: rotateCircles 10s infinite linear ;
+}
+
+@keyframes rotateCircles {
+    0% {
+        transform: rotate(0deg);
+    }
+    20% {
+    
+        transform: rotate(45deg);
+    }
+    40% {
+    
+        transform: rotate(270deg);
+    }
+    60% {
+        transform: rotate(180deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.c1, .c2, .c3, .c4 {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 100%;
+    opacity: 0.5;
+    box-shadow: 5px 5px 20px;
+}
+
+.c1 {
+    background: purple;
+    left: 100px;
+}
+.c2 {
+    background: yellow;
+    left: 200px;
+    top: 100px;
+}
+.c3 {
+    background: purple;
+    left: 100px;
+    top: 200px;
+}
+.c4 {
+    background: yellow;
+    left:0;
+    top: 100px;
+}

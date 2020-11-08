@@ -1,0 +1,78 @@
+.text1 {
+    background-color: green;
+    font-style: italic;
+    font-size: 20px;
+    border: 10px solid black;
+    margin: 20px;
+}
+
+.text2 {
+    color: indianred;
+    background-image: url("images/background_tom.jpg");
+    font-weight: bold;
+    height: 100px;
+    width: 400px;
+    overflow: auto;
+}
+
+.text3 {
+    color: red;
+    background-color: rgb(60, 60,160);
+    font-size: large;
+    height: 100%;
+    width: 50%;
+    border: 10px solid black;
+    padding: 30px;
+    margin-top: 40px;
+}
+
+.text4 {
+    background-image: linear-gradient(red, yellow, green);
+    font-family: "Arial",   "Times New Roman", Times, serif;
+    padding: 30px;
+}
+
+.table1 {
+    height: 200px;
+    width: 600px;
+    margin: auto;
+}
+
+.table1 .table_head {
+    background-color: blue;
+}
+.table1 .row_1 {
+    background-color: #4e77cf;
+}
+.table1 .row_2 {
+    background-color: #a4bcee;
+}
+
+.table2 {
+    height: 150px;
+    width: 500px;
+    margin: auto;
+}
+
+.table2 .table_head {
+    background-color: #493e38;
+}
+.table2 tr {
+    background-color: #a99aac;
+}
+.div1 {
+    margin: 140px;
+}
+
+.img_left {
+    width: 200px;
+    height: 300px;
+    float: left;
+}
+.img_right {
+    width: 150;
+    height: 200px;
+    float: right;
+}
+
+

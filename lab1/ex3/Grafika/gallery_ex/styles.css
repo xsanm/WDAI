@@ -1,0 +1,53 @@
+body {
+	font-size: 62.5%;
+	margin: 0px;
+	padding: 0px;
+}
+#content {
+	margin-left: 15px;
+	margin-top: 15px;
+	border: 1px dashed #999;
+	border-right: none;
+	border-bottom: none;
+}
+
+#gallery .figure p {
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	text-align: center;
+	line-height: normal;
+	padding: 10px;
+	font-size: 1.1em;
+	margin: 10px;
+}
+.figure {
+	background-image: url("drop_shadow.gif");
+	background-position: 6px 6px;
+	background-size: 210px 210px;
+	background-repeat: no-repeat;
+}
+
+#gallery {
+	display: grid;
+	grid-template-columns: 240px 240px;
+	grid-gap: 20px;
+}
+.photo {
+	text-align: center;
+	width: 200px;
+	height: 200px;
+	border: 2px solid black;
+	padding: 4px;
+}
+
+h1 {
+	font: normal 2.4em Verdana, Arial, Helvetica, sans-serif;
+	margin: 0;
+	border-bottom: 1px dashed #999;
+	padding: 5px 0 5px 8px;
+	color: #14556b;
+}
+p {
+	font: 1.6em/160% Georgia, "Times New Roman", Times, serif;
+
+}

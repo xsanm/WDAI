@@ -1,0 +1,77 @@
+body {
+    margin: 0;
+}
+
+.top {
+    width: 100%;
+    height: 100px;;
+    background-color: #c5b7b6;
+    position: sticky;
+}
+
+.logo {
+    width: 100px;
+    height: 20px;
+    position: relative;
+    top: 20px;
+    padding: 20px 20px 20px 20px;
+    background-color: bisque;
+    float: left;
+    margin-left: 3%;
+    text-decoration: none;
+}
+
+.menuBig {
+    width: 550px;
+    float: right;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-right: 15px;
+    text-decoration: none;
+    list-style: none;
+    text-align: center;
+}
+
+.menuBig > a > li {
+    display: box;
+}
+
+.menuBig > a {
+    text-decoration: none;
+    margin: 1%;
+    background-color: darkgrey;
+    flex-grow: 1;
+}
+
+.menu input{
+    display: none;
+}
+
+@media (max-width: 800px) {
+    .menu input{
+        display: block;
+        width: 40px;
+        height: 32px;
+        position: absolute;
+        top: -7px;
+        right: -5px;
+  
+  cursor: pointer;
+    }
+    .menu input:not(:checked) ~ .menuBig {
+        display: none;
+    }
+    .menu input:checked ~ .menuBig {
+        position: absolute;
+        top: 100px;
+        width: 100%;
+        background-color: blanchedalmond;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+    
+    }
+}
+

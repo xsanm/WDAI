@@ -31,6 +31,9 @@ body {
 
 .menuBig {
     width: 550px;
+    position: absolute;
+    top: 20px;
+    right: 40px;
     float: right;
     display: flex;
     flex-direction: row;
@@ -93,6 +96,7 @@ body {
         margin: 0;
         position: absolute;
         top: 100px;
+        left: 0;
         width: 100%;
         background-color: blanchedalmond;
         text-align: center;

@@ -98,3 +98,11 @@ body {
     width: 12%;
     height: 12%;
 }
+
+.commments {
+    cursor:pointer;
+}
+
+.likes {
+    cursor:pointer;
+}

@@ -1,4 +1,15 @@
 
+#photos > h2 {
+    color: #45A29E;
+    padding: 2% 5%;
+    letter-spacing: 3px;
+    font-size: 40px;
+}
+
+#photos {
+    background-color: #0B0C10;
+    padding-bottom: 100px;
+}
 .top {
     text-align: center;
     width: 100%;
@@ -8,13 +19,12 @@
     padding-top: 100px;
 }
 
-.top > p {
-    color: green;
-}
+
 
 .content {
     display: grid;
     grid-template-columns: 50% 50%;
+    
 }
 
 .left {
@@ -23,20 +33,21 @@
 
 .text > h2 {
     text-transform: uppercase;
-    color: #4d4d4d;
+    color: #45A29E;
+    padding-top: 30px;
 }
 .text > p {
-    color: #757575;
+    color: #C5C6C7;
+
 }
 
 .left a {
+    border: none;
     text-decoration: none;
-    color: rgb(54, 161, 54);
+    color: #66FCF1;
 }
 
-.right {
 
-}
 
 .gallery {
     position: relative;
@@ -49,7 +60,7 @@
 }
 
 .pic:hover{
-    border: 10px solid green;
+    border: 10px solid #66FCF1;
     z-index: 3;
 }
 

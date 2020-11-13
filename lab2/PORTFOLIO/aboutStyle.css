@@ -1,0 +1,39 @@
+#about {
+    background-color: #0B0C10;
+    color:#C5C6C7;
+    padding-bottom: 50px;
+}
+
+#about h2 {
+    color: #45A29E;
+    padding: 2% 5%;
+    letter-spacing: 3px;
+    font-size: 40px;
+}
+
+
+#about > .oval {
+    width: 500px;
+    height: 500px;
+    color: #111;
+    text-align: center;
+    font-size: 90px;
+    float: left;
+    shape-outside: polygon(0 0, 0% 100%, 99% 0);
+    background-clip: content-box;
+    padding: 30px;
+}
+#about img {
+    clip-path: polygon(0 0, 0% 100%, 99% 0);;
+}
+
+#about > span {
+    padding-top: 70px;
+    display: inline-block;
+ 
+}
+
+#about > p{
+    padding: 30px;
+    letter-spacing: 3px;
+}

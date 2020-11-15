@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+
+<body>
+    <div id="content"></div>
+
+
+    <form id="menu" onsubmit="addNewContact(event)">
+        <div id="inn">
+            <label for="addName">Imie i Nazwisko</label>
+            <input type="text" name="addName" id="addName" required>
+        </div>
+        <div id="inn">
+            <label for="addPhone">Telefon</label>
+            <input type="text" name="addPhone" id="addPhone" pattern="^[0-9]{9}$" required>
+
+        </div>
+        <input type="submit" id="addContact" value="Dodaj">
+
+    </form>
+
+</body>
+
+</html>

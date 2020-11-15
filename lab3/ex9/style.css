@@ -1,0 +1,77 @@
+body {
+    background-color: #c5e1ec;
+    width: 1000px;
+}
+
+.contactElement {
+    margin: auto;
+    margin: 20px auto 20px auto;
+    width: 800px;
+    height: 80px;
+    background-color: white;
+    position: relative;
+}
+
+.contactName {
+    position: absolute;
+    left: 30px;
+    top: 0px;
+    font-weight: bold;
+}
+
+.contactNUmber {
+    position: absolute;
+    left: 30px;
+    top: 30px;
+}
+
+.contactDelete {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    width: 40px;
+    height: 40px;
+    background-color: green;
+    cursor: pointer;
+    border-radius: 10%;
+}
+
+.contactDelete>img {
+    background-color: green;
+    color: green;
+    width: 25px;
+    height: 25px;
+}
+
+#menu {
+    margin: auto;
+    margin: 20px auto 20px auto;
+    width: 800px;
+    height: 80px;
+    background-color: white;
+    position: relative;
+    display: grid;
+    grid-template-columns: 35% 35% auto;
+}
+
+#inn {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+#addContact {
+    background-color: green;
+    border: 2px solid white;
+    color: white;
+    border-radius: 10%;
+    margin: 20px 0px 20px 15px;
+    height: 40px;
+    width: 200px;
+    cursor: pointer;
+}
+
+#addPhone,
+#addName {
+    height: 25px;
+}

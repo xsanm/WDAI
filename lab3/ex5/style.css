@@ -1,0 +1,46 @@
+body {
+    display: flex;
+    flex-flow: column;
+}
+
+#onoff,
+#reset {
+    width: 100px;
+    margin: 10px;
+}
+
+#blocks {
+    margin: 20px;
+    position: relative;
+    text-align: center;
+}
+
+#block1 {
+    background-color: blue;
+    z-index: 1;
+    width: 400px;
+    height: 400px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#block2 {
+    background-color: red;
+    z-index: 2;
+    width: 250px;
+    height: 250px;
+    position: absolute;
+    top: 75px;
+    left: 75px;
+}
+
+#block3 {
+    background-color: yellow;
+    z-index: 3;
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: 150px;
+    left: 150px;
+}

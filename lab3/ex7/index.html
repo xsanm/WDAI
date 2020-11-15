@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+
+<body>
+    <form id="form" onsubmit="validateData()">
+        <label for="firstname">First Name</label>
+        <input type="text" name="firstname" id="firstname" pattern="[A-Za-z]{1,30}" title="Use only letters" required>
+        <br>
+
+        <label for="lastname">Last Name</label>
+        <input type="text" name="lastname" id="lastname" pattern="[A-Za-z]{1,30}" title="Use only letters" required>
+        <br>
+
+        <label for="phone">Phone Number</label>
+        <input type="text" name="phone" id="phone" pattern="[0-9]{9}" title="Number has to have 9 digit" required>
+        <br>
+
+        <label for="gender">Gender:</label><br>
+        <input type="radio" id="male" name="gender" value="male">
+        <label for="male">Male</label><br>
+        <input type="radio" id="female" name="gender" value="female" required>
+        <label for="female">Female</label><br>
+
+        <label for="birthdate">Birthday:</label>
+        <input type="date" id="birthdate" name="birthday"> <br>
+
+        <label for="retirementYear">Year of retirement: </label><br>
+        <input type="text" id="retirementYear" pattern="^[0-9]{4}$" required><br>
+
+        <input type="submit" value="Submit">
+    </form>
+</body>
+
+</html>

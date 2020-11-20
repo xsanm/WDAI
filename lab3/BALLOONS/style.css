@@ -1,0 +1,53 @@
+.animated {
+    transition: background-color 0.5s linear;
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Safari */
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    -moz-user-select: none;
+    /* Old versions of Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently
+     supported by Chrome, Opera and Firefox */
+}
+
+.balloon {
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+}
+
+#pointsWidget {
+    text-align: center;
+    margin: auto;
+    margin-top: 40px;
+    font-size: 15px;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto;
+    width: 900px;
+}
+
+#gameArea {
+    position: relative;
+    text-align: center;
+    margin: auto;
+    padding: 5px;
+    margin-top: 10px;
+    font-size: 40px;
+    border-color: #aaaaaa;
+    border-style: solid;
+    border-width: 30px;
+    width: 900px;
+    height: 400px;
+}
+
+table {
+    border-spacing: 10px;
+    border-collapse: separate;
+    display: block;
+    margin: auto;
+}

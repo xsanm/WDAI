@@ -11,15 +11,19 @@
 
 <body>
 
-    <p id="score">0</p>
+    <p id="score">Score: 0</p>
 
-    <button id="onoff" onclick="onoffPropagation()"> Turn Off Counting</button>
-    <button id="reset" onclick="reset()"> Reset </button>
+    <button id="onoff" onclick="onoffPropagation()"> Turn Off Propagation</button>
+    <button id="reset" onclick="reset()"> Reset Score </button>
 
     <div id="blocks">
-        <div id="block1" onclick="clickBlock1()">1</div>
-        <div id="block2" onclick="clickBlock2()">2</div>
-        <div id="block3" onclick="clickBlock3()">3</div>
+        <div id="block1" onclick="clickBlock1()">1
+            <div id="block2" onclick="clickBlock2(event)">2
+                <div id="block3" onclick="clickBlock3(event)">5</div>
+            </div>
+        </div>
+
+
     </div>
 
 </body>

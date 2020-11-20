@@ -36,9 +36,11 @@ function missedShoot() {
 
 function setBackground() {
     document.getElementById("gameArea").style.background = '#ff5c33';
-    (async() => {
-        await setTimeout(() => { document.getElementById("gameArea").style.background = 'white' }, 100);
-    })();
+    /*(async() => {
+            await setTimeout(() => { document.getElementById("gameArea").style.background = 'white' }, 100);
+        })();*/
+
+    setTimeout(() => { document.getElementById("gameArea").style.background = 'white' }, 100);
 }
 
 
@@ -142,9 +144,14 @@ function generateBalloons() {
 
     new_div.style.backgroundColor = getRandomColor();
     gameArea.appendChild(new_div);
-    (async() => {
+
+    /*(async() => {
         await setTimeout("balloonEvent(null, false," + balloonCounter + ")", 3000);
-    })()
+    })()*/
+
+
+
+    setTimeout("balloonEvent(null, false," + balloonCounter + ")", 3000);
     startTime = performance.now();
 }
 

@@ -1,0 +1,38 @@
+{
+    "Results": [{
+            "id": 1,
+            "nick": "slon",
+            "score": 50
+        },
+        {
+            "id": 2,
+            "nick": "qwerty1",
+            "score": 15
+        },
+        {
+            "id": 3,
+            "nick": "Turbo Grzegorz",
+            "score": 250
+        },
+        {
+            "id": 4,
+            "nick": "qaz1wsx2",
+            "score": 90
+        },
+        {
+            "id": 5,
+            "nick": "niYza",
+            "score": 60
+        },
+        {
+            "nick": "tudtudtud",
+            "score": 21,
+            "id": 6
+        },
+        {
+            "id": 7,
+            "nick": "a",
+            "score": 3
+        }
+    ]
+}

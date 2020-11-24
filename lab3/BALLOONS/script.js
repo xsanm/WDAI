@@ -8,14 +8,83 @@ let shootedBallons = 0;
 let shoots = 0;
 let missedShoots = 0;
 let points = 0;
-let audio1 = new Audio('sounds/balloon-pop.mp3');
-let audio2 = new Audio('sounds/shoot-bow.mp3');
+const audio1 = new Audio('sounds/balloon-pop.mp3');
+const audio2 = new Audio('sounds/shoot-bow.mp3');
+const rankURL = "https://jsonblob.com/api/jsonBlob/ce0058ef-2e81-11eb-967c-71493dbd26fa";
+const rankURL2 = "https://jsonblob.com/ce0058ef-2e81-11eb-967c-71493dbd26fa";
 
+
+
+function printResults(data) {
+    //console.log(data);
+    document.getElementById("highcoresHeader").style.visibility = "visible";
+    document.getElementById("playAgainBtn").style.visibility = "visible";
+    document.getElementById("highscores").style.visibility = "visible";
+
+    let table = document.getElementById("highscores");
+    for (let i = 0; i < data.length; i++) {
+        let newtTr = document.createElement("tr");
+        let newTd1 = document.createElement("td");
+        let newTd2 = document.createElement("td");
+        let newTd3 = document.createElement("td");
+        newTd1.innerHTML = data[i].id;
+        newTd2.innerHTML = data[i].nick;
+        newTd3.innerHTML = data[i].score;
+        newtTr.appendChild(newTd1);
+        newtTr.appendChild(newTd2);
+        newtTr.appendChild(newTd3);
+        table.appendChild(newtTr);
+    }
+
+}
+
+function GetSortOrder(prop) {
+    return function(a, b) {
+        if (parseInt(a[prop]) > parseInt(b[prop])) {
+            return -1;
+        } else if (parseInt(a[prop]) < parseInt(b[prop])) {
+            return 1;
+        }
+        return 0;
+    }
+}
+
+async function actualizeRank() {
+    let data = await fetch(rankURL).then(r => r.json());
+    //console.log(data['Results']);
+
+    //data['Results'].push({ "nick": playerName, "score": points });
+
+    data['Results'].sort(GetSortOrder("score"));
+    if (data['Results'][6].score <= points) {
+        data['Results'][6].score = points;
+        data['Results'][6].nick = playerName;
+        data['Results'].sort(GetSortOrder("score"));
+    }
+
+    for (let i = 0; i < data['Results'].length; i++) {
+        data['Results'][i].id = i + 1;
+    }
+
+    printResults(data['Results']);
+
+    //console.log(typeof data);
+
+    let res = await fetch(rankURL, {
+        method: 'PUT',
+        headers: {
+            "Content-type": "application/json",
+        },
+        body: JSON.stringify(data)
+    });
+
+    console.log(res);
+}
 
 function initialize() {
     gameArea.setAttribute("onclick", "missedShoot()");
     gameArea.style.cursor = "crosshair";
-    //getPlayerName();
+    getPlayerName();
     setTimeout("generateBalloons()", 100 + (30 - balloonCounter) * 30);
 }
 
@@ -23,30 +92,16 @@ function missedShoot() {
     console.log("niecelny strzal");
     missedShoots++;
     shoots++;
-
     points -= 5;
-    //setPoints();
-
-
-    //audio2.play();
-
-    //setShootsNumber();
-    //setRedBackground();
     actualizeStats();
 }
 
 function setBackground() {
     document.getElementById("gameArea").style.background = '#ff5c33';
-    /*(async() => {
-            await setTimeout(() => { document.getElementById("gameArea").style.background = 'white' }, 100);
-        })();*/
-
     setTimeout(() => { document.getElementById("gameArea").style.background = 'white' }, 100);
 }
 
 
-
-//typ
 function balloonEvent(event, shooted, id) {
     //console.log(id);
     if (event != null) event.stopPropagation();
@@ -67,10 +122,6 @@ function balloonEvent(event, shooted, id) {
 
         setBackground()
         actualizeStats();
-        //setShootsNumber();
-        //setShootedBallonNumber();
-        //generateBalloons();
-        //setTimeout("generateBalloons()", 150 + (30 - balloonCounter) * 100);
     } else {
         if (document.getElementById(id) != null) {
             document.getElementById(id).remove();
@@ -78,10 +129,12 @@ function balloonEvent(event, shooted, id) {
             //generateBalloons();
         }
     }
-    if (balloonCounter < 30) {
+    if (balloonCounter < 3) {
         setTimeout("generateBalloons()", 100 + (30 - balloonCounter) * 20);
     } else {
         console.log("koniec");
+        window.confirm("Koniec! Twoj wynik to: " + points);
+        actualizeRank();
     }
 
 
@@ -101,27 +154,6 @@ function actualizeStats() {
     document.getElementById("pointsBox").innerHTML = points;
 }
 
-/*function setBallonNumber() {
-    document.getElementById("roundBox").innerHTML = currentBallon;
-}
-
-function setShootsNumber() {
-    document.getElementById("shootsFiredBox").innerHTML = shoots;
-    setAccuracy();
-}
-
-function setShootedBallonNumber() {
-    document.getElementById("hitBox").innerHTML = shootedBallons;
-}
-
-function setAccuracy() {
-    document.getElementById("accuracyBox").innerHTML = (shootedBallons * 100 / shoots).toFixed(2);;
-}
-
-function setPoints() {
-    document.getElementById("pointsBox").innerHTML = points;
-}
-*/
 
 function generateBalloons() {
 
@@ -146,12 +178,6 @@ function generateBalloons() {
     new_div.style.backgroundColor = getRandomColor();
     gameArea.appendChild(new_div);
 
-    /*(async() => {
-        await setTimeout("balloonEvent(null, false," + balloonCounter + ")", 3000);
-    })()*/
-
-
-
     setTimeout("balloonEvent(null, false," + balloonCounter + ")", 3000);
     startTime = performance.now();
 }
@@ -171,17 +197,28 @@ function getRandomColor() {
 }
 
 
-//generateBalloons();
-//generateBalloons();
-//generateBalloons();
-//generateBalloons();
-//generateBalloons();
-
-
-
-
 initialize()
 
+function playAgain() {
+    playerName = "";
+    startTime = 0;
+    stopTime = 0;
+    currentBallon = 0;
+    balloonCounter = 0;
+    shootedBallons = 0;
+    shoots = 0;
+    missedShoots = 0;
+    points = 0;
+    document.getElementById("highcoresHeader").style.visibility = "hidden";
+    document.getElementById("playAgainBtn").style.visibility = "hidden";
+
+    let tab = document.getElementById("highscores");
+    tab.style.visibility = "hidden";
+    while (tab.firstChild) {
+        tab.removeChild(tab.lastChild);
+    }
+    initialize();
+}
 
 
 

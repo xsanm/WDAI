@@ -1,0 +1,27 @@
+{
+    "Cars": [
+        { "name": "Fiat" },
+        { "name": "Mercedes" },
+        { "name": "Lambo" },
+        { "name": "BMW" },
+        { "name": "Porshe" }
+    ],
+
+    "Sweets": [
+        { "name": "chewing gum" },
+        { "name": "biscuits" }
+    ],
+
+    "Meals": [
+        { "name": "pierogi" },
+        { "name": "fries" },
+        { "name": "meat" },
+        { "name": "bread" }
+    ],
+
+    "Bikes": [
+        { "name": "Kross" },
+        { "name": "Meirda" }
+    ]
+
+}

@@ -8,7 +8,8 @@ let shootedBallons = 0;
 let shoots = 0;
 let missedShoots = 0;
 let points = 0;
-
+let audio1 = new Audio('sounds/balloon-pop.mp3');
+let audio2 = new Audio('sounds/shoot-bow.mp3');
 
 
 function initialize() {
@@ -26,8 +27,8 @@ function missedShoot() {
     points -= 5;
     //setPoints();
 
-    let audio = new Audio('sounds/shoot-bow.mp3');
-    //audio.play();
+
+    //audio2.play();
 
     //setShootsNumber();
     //setRedBackground();
@@ -58,8 +59,8 @@ function balloonEvent(event, shooted, id) {
         shootedBallons++;
         shoots++;
 
-        let audio = new Audio('sounds/balloon-pop.mp3');
-        //audio.play();
+
+        //audio1.play();
 
         points += (10 - Math.round(10 * (stopTime - startTime - 500) / 2000));
         //setPoints();

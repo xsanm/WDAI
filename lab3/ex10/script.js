@@ -90,20 +90,15 @@ initialize();
 
 //zaznacza/odznacza kategorie i dodaje/usuwe wszystkie lementy z niej
 function clickCategory(id) {
-    console.log("Add category " + id);
     if (document.getElementById(id).checked) {
         let nodes = document.getElementById("ul" + id).childNodes;
-        console.log(nodes);
         for (let i = 0; i < nodes.length; i++) {
-            console.log(nodes[i].childNodes[0]);
             nodes[i].childNodes[0].checked = true;
             clickProduct(nodes[i].childNodes[0].id);
         }
     } else {
         let nodes = document.getElementById("ul" + id).childNodes;
-        console.log(nodes);
         for (let i = 0; i < nodes.length; i++) {
-            console.log(nodes[i].childNodes[0]);
             nodes[i].childNodes[0].checked = false;
             clickProduct(nodes[i].childNodes[0].id);
         }
@@ -112,7 +107,6 @@ function clickCategory(id) {
 
 //zaznacza/odznacza produkt + zaznacza kategorie
 function clickProduct(id) {
-    console.log("Add product " + id);
     if (document.getElementById(id).checked) {
         let parentName = document.getElementById(id).parentElement.parentElement.id;
         parentName = parentName.substr(2, parentName.length - 2);

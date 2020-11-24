@@ -1,5 +1,5 @@
 function addListElmentToDOM(father, elName, onClickFunction) {
-    let label1 = document.createElement("label");
+    // let btn = document.createElement("button");
     let checkInput = document.createElement("input");
     let label2 = document.createElement("label");
     let newli = document.createElement("li");
@@ -10,14 +10,14 @@ function addListElmentToDOM(father, elName, onClickFunction) {
     checkInput.setAttribute("type", "checkbox");
     checkInput.setAttribute("name", elName);
 
-    label1.setAttribute("for", elName);
-    label1.innerHTML = "V";
+    //btn.setAttribute("for", elName);
+    //btn.innerHTML = "V";
     label2.setAttribute("for", elName);
     label2.innerHTML = elName;
 
     newli.setAttribute("id", "li" + elName);
 
-    newli.appendChild(label1);
+    //if (ifAddButton) newli.appendChild(btn);
     newli.appendChild(checkInput);
     newli.appendChild(label2);
     newli.append(newUl);
@@ -25,16 +25,22 @@ function addListElmentToDOM(father, elName, onClickFunction) {
     father.appendChild(newli);
 }
 
-
 function addCategoryToDOM(categoryName) {
 
     //adding category
-    addListElmentToDOM(document.getElementById("mainList"), categoryName, "");
+    addListElmentToDOM(document.getElementById("mainList"), categoryName, "clickCategory(id)");
 
     //adding container for products
+    let btn = document.createElement("button");
+    btn.setAttribute("id", "btn" + categoryName);
+    btn.setAttribute("onclick", "collapse(id)");
+    btn.innerHTML = "V";
+
+
     let newUl = document.createElement("ul");
-    newUl.setAttribute("id", "ul" + categoryName);
+    newUl.setAttribute("id", "ul" + categoryName, 1);
     document.getElementById("li" + categoryName).append(newUl);
+    document.getElementById("li" + categoryName).prepend(btn);
 }
 
 function addProductToDOM(categoryName, productName) {
@@ -45,23 +51,23 @@ function addProductToDOM(categoryName, productName) {
     if (productElement !== null && productElement.parentElement == categoryElement) return;
 
     //adding product
-    addListElmentToDOM(categoryElement, productName, "");
+    addListElmentToDOM(categoryElement, productName, "clickProduct(id)");
+    let newLi = document.createElement("li");
+    newLi.setAttribute("id", "p" + productName);
+    newLi.innerHTML = productName;
+    newLi.style.display = "none";
+    document.getElementById("rightList").appendChild(newLi);
+
 }
 
 function addCategories(data) {
-    //console.log(data);
-
     for (i of data['Categories']) {
-        //console.log(i);
         addCategoryToDOM(i);
     }
 }
 
 function addProducts(cat, data) {
-    console.log(data);
     for (i of cat['Categories']) {
-        console.log(i);
-        console.log(data[i]);
         if (data[i])
             for (j of data[i]) {
                 addProductToDOM(i, j.name);
@@ -69,12 +75,7 @@ function addProducts(cat, data) {
     }
 }
 
-//fetch("productsA.json").then(r => r.json()).then(a => console.log(a["Bikes"]));
-
-//let p = fetch("productsA.json").then(r => r.json());
-//console.log(p["Bikes"]);
-
-async function readData() {
+async function initialize() {
     let cat = await fetch("categories.json").then(r => r.json());
     let prodA = await fetch("productsA.json").then(r => r.json());
     let prodB = await fetch("productsB.json").then(r => r.json());
@@ -83,13 +84,53 @@ async function readData() {
     addProducts(cat, prodA);
     addProducts(cat, prodB);
 
-    console.log(prodA);
-    document.getElementById("left").innerHTML = prodA['Cars'][1].name;
-    //fetch("productsA.json").then(r => r.json()).then(a => addProducts(a));
-    //fetch("productsB.json").then(r => r.json()).then(a => addProducts(a));
-    return cat;
 }
 
-readData();
-//setTimeout("console.log(cat);", 100);
-//console.log(cat);
+initialize();
+
+//zaznacza/odznacza kategorie i dodaje/usuwe wszystkie lementy z niej
+function clickCategory(id) {
+    console.log("Add category " + id);
+    if (document.getElementById(id).checked) {
+        let nodes = document.getElementById("ul" + id).childNodes;
+        console.log(nodes);
+        for (let i = 0; i < nodes.length; i++) {
+            console.log(nodes[i].childNodes[0]);
+            nodes[i].childNodes[0].checked = true;
+            clickProduct(nodes[i].childNodes[0].id);
+        }
+    } else {
+        let nodes = document.getElementById("ul" + id).childNodes;
+        console.log(nodes);
+        for (let i = 0; i < nodes.length; i++) {
+            console.log(nodes[i].childNodes[0]);
+            nodes[i].childNodes[0].checked = false;
+            clickProduct(nodes[i].childNodes[0].id);
+        }
+    }
+}
+
+//zaznacza/odznacza produkt + zaznacza kategorie
+function clickProduct(id) {
+    console.log("Add product " + id);
+    if (document.getElementById(id).checked) {
+        let parentName = document.getElementById(id).parentElement.parentElement.id;
+        parentName = parentName.substr(2, parentName.length - 2);
+        document.getElementById("li" + parentName).childNodes[1].checked = true;
+        document.getElementById("p" + id).style.display = "block";
+    } else {
+        document.getElementById("p" + id).style.display = "none";
+    }
+
+}
+
+//zwija i rozwija liste
+function collapse(id) {
+    if (document.getElementById(id).innerHTML === 'V') {
+        document.getElementById("ul" + id.substr(3, id.length - 3)).style.display = "none";
+        document.getElementById(id).innerHTML = '>';
+    } else {
+        document.getElementById("ul" + id.substr(3, id.length - 3)).style.display = "block";
+        document.getElementById(id).innerHTML = 'V';
+    }
+}

@@ -5,3 +5,7 @@ ul {
 li {
     list-style: none;
 }
+
+body {
+    display: flex;
+}

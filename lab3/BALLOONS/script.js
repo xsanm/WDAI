@@ -1,3 +1,13 @@
+/*  
+    Ranking ustalony tylko na 7 rekordów, 
+    tak było pokazene w przykładzie ale można to łatwo zmienic
+
+    Ponizsza linijka odpowiada za szybosc pojawiania sie balonu, 
+    jest na tyle prosta że nie tworzylem funkcji
+    setTimeout("generateBalloons()", 100 + (30 - balloonCounter) * 20);
+*/
+
+
 const gameArea = document.getElementById('gameArea');
 let playerName = "";
 let startTime = 0;
@@ -13,8 +23,40 @@ const audio2 = new Audio('sounds/shoot-bow.mp3');
 const rankURL = "https://jsonblob.com/api/jsonBlob/ce0058ef-2e81-11eb-967c-71493dbd26fa";
 const rankURL2 = "https://jsonblob.com/ce0058ef-2e81-11eb-967c-71493dbd26fa";
 
-//TODO liczba elementow rankingu
-//dzwieki
+//comparator do sortowania JSON
+function GetSortOrder(prop) {
+    return function(a, b) {
+        if (parseInt(a[prop]) > parseInt(b[prop])) {
+            return -1;
+        } else if (parseInt(a[prop]) < parseInt(b[prop])) {
+            return 1;
+        }
+        return 0;
+    }
+}
+
+//zmiana tła po celnym strzale
+function setBackground() {
+    document.getElementById("gameArea").style.background = '#ff5c33';
+    setTimeout(() => { document.getElementById("gameArea").style.background = 'white' }, 100);
+}
+
+//generuje pseudolosowa liczbe
+function generateRandomNumber(a, b) {
+    return Math.floor(Math.random() * (b - a)) + a;
+}
+
+//generuje pseudolosowy kolor
+function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+
+
 
 function printResults(data) {
     //console.log(data);
@@ -42,15 +84,31 @@ function printResults(data) {
 
 }
 
-function GetSortOrder(prop) {
-    return function(a, b) {
-        if (parseInt(a[prop]) > parseInt(b[prop])) {
-            return -1;
-        } else if (parseInt(a[prop]) < parseInt(b[prop])) {
-            return 1;
-        }
-        return 0;
-    }
+//pyta gracza o nick, do skutku
+function getPlayerName() {
+    playerName = prompt("Podaj swój nick: ");
+    if (playerName === "") return getPlayerName();
+    document.getElementById("nickBox").innerHTML = playerName;
+}
+
+//aktualizuje gorny panel statystyk
+function actualizeStats() {
+    document.getElementById("roundBox").innerHTML = currentBallon;
+    document.getElementById("shootsFiredBox").innerHTML = shoots;
+    document.getElementById("hitBox").innerHTML = shootedBallons;
+    document.getElementById("accuracyBox").innerHTML = (shootedBallons * 100 / shoots).toFixed(2);
+    document.getElementById("pointsBox").innerHTML = points;
+}
+
+//obslugiwanie nietrafionego strzału
+function missedShoot() {
+    if (balloonCounter == 0) return;
+    console.log("niecelny strzal");
+    audio2.play();
+    missedShoots++;
+    shoots++;
+    points -= 5;
+    actualizeStats();
 }
 
 async function actualizeRank() {
@@ -87,33 +145,21 @@ async function actualizeRank() {
     console.log(res);
 }
 
+//inicjalizacja gry
 function initialize() {
     getPlayerName();
     gameArea.setAttribute("onclick", "missedShoot()");
     gameArea.style.cursor = "crosshair";
-
     setTimeout("generateBalloons()", 100 + (30 - balloonCounter) * 30);
-
 }
 
-function missedShoot() {
-    if (balloonCounter == 0) return;
-    console.log("niecelny strzal");
-    audio2.play();
-    missedShoots++;
-    shoots++;
-    points -= 5;
-    actualizeStats();
+//oblicza punkty na podstawie reakcji
+function countPoints(a, b) {
+    return (10 - Math.round(10 * (b - a - 500) / 2000));
 }
 
-function setBackground() {
-    document.getElementById("gameArea").style.background = '#ff5c33';
-    setTimeout(() => { document.getElementById("gameArea").style.background = 'white' }, 100);
-}
-
-
+//strzał lub koniec czasu
 function balloonEvent(event, shooted, id) {
-    //console.log(id);
     if (event != null) event.stopPropagation();
     if (document.getElementById(id) == null) return;
     if (shooted) {
@@ -126,8 +172,7 @@ function balloonEvent(event, shooted, id) {
 
         audio1.play();
 
-        points += (10 - Math.round(10 * (stopTime - startTime - 500) / 2000));
-        //setPoints();
+        points += countPoints(startTime, stopTime);
 
         setBackground()
         actualizeStats();
@@ -135,10 +180,9 @@ function balloonEvent(event, shooted, id) {
         if (document.getElementById(id) != null) {
             document.getElementById(id).remove();
             console.log("czas minal " + id + " nietrafiony");
-            //generateBalloons();
-        }
+        };
     }
-    if (balloonCounter < 20) {
+    if (balloonCounter < 30) {
         setTimeout("generateBalloons()", 100 + (30 - balloonCounter) * 20);
     } else {
         console.log("koniec");
@@ -147,27 +191,9 @@ function balloonEvent(event, shooted, id) {
         gameArea.style.cursor = "default";
         actualizeRank();
     }
-
-
 }
 
-//asking player about nick 
-function getPlayerName() {
-    playerName = prompt("Podaj swój nick: ");
-    if (playerName === "") return getPlayerName();
-    document.getElementById("nickBox").innerHTML = playerName;
-
-}
-
-function actualizeStats() {
-    document.getElementById("roundBox").innerHTML = currentBallon;
-    document.getElementById("shootsFiredBox").innerHTML = shoots;
-    document.getElementById("hitBox").innerHTML = shootedBallons;
-    document.getElementById("accuracyBox").innerHTML = (shootedBallons * 100 / shoots).toFixed(2);
-    document.getElementById("pointsBox").innerHTML = points;
-}
-
-
+//generuje i wyswietla balon
 function generateBalloons() {
 
     ++balloonCounter;
@@ -196,22 +222,8 @@ function generateBalloons() {
 }
 
 
-function generateRandomNumber(a, b) {
-    return Math.floor(Math.random() * (b - a)) + a;
-}
 
-function getRandomColor() {
-    var letters = '0123456789ABCDEF';
-    var color = '#';
-    for (var i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-}
-
-
-
-
+//graj ponownie
 function playAgain() {
     playerName = "";
     document.getElementById("highcoresHeader").style.visibility = "hidden";

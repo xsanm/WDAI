@@ -8,4 +8,5 @@ li {
 
 body {
     display: flex;
+    column-gap: 150px;
 }

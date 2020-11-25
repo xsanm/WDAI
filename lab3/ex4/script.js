@@ -1,7 +1,7 @@
 function addListElement() {
     let list = document.getElementById("mainList");
     let newLi = document.createElement("li");
-    newLi.innerHTML = list.childNodes.length;
+    newLi.innerHTML = list.childNodes.length + 1;
     list.appendChild(newLi);
 }
 

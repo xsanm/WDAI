@@ -1,5 +1,12 @@
+/*
+    Odczytuje pliki lokalnie, wtedy łatwiej zwyrfikować działanie,
+    ppliki można umieśćic na serwerze, wtedy zmieni się jedynie URL
+    pliku w fetch();
+
+*/
+
+
 function addListElmentToDOM(father, elName, onClickFunction) {
-    // let btn = document.createElement("button");
     let checkInput = document.createElement("input");
     let label2 = document.createElement("label");
     let newli = document.createElement("li");
@@ -10,14 +17,11 @@ function addListElmentToDOM(father, elName, onClickFunction) {
     checkInput.setAttribute("type", "checkbox");
     checkInput.setAttribute("name", elName);
 
-    //btn.setAttribute("for", elName);
-    //btn.innerHTML = "V";
     label2.setAttribute("for", elName);
     label2.innerHTML = elName;
 
     newli.setAttribute("id", "li" + elName);
 
-    //if (ifAddButton) newli.appendChild(btn);
     newli.appendChild(checkInput);
     newli.appendChild(label2);
     newli.append(newUl);
@@ -86,7 +90,7 @@ async function initialize() {
 
 }
 
-initialize();
+
 
 //zaznacza/odznacza kategorie i dodaje/usuwe wszystkie lementy z niej
 function clickCategory(id) {
@@ -128,3 +132,6 @@ function collapse(id) {
         document.getElementById(id).innerHTML = 'V';
     }
 }
+
+
+initialize();

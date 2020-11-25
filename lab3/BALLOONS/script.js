@@ -13,7 +13,8 @@ const audio2 = new Audio('sounds/shoot-bow.mp3');
 const rankURL = "https://jsonblob.com/api/jsonBlob/ce0058ef-2e81-11eb-967c-71493dbd26fa";
 const rankURL2 = "https://jsonblob.com/ce0058ef-2e81-11eb-967c-71493dbd26fa";
 
-
+//TODO liczba elementow rankingu
+//dzwieki
 
 function printResults(data) {
     //console.log(data);
@@ -22,14 +23,17 @@ function printResults(data) {
     document.getElementById("highscores").style.visibility = "visible";
 
     let table = document.getElementById("highscores");
+
+    table.innerHTML = '';
+
     for (let i = 0; i < data.length; i++) {
         let newtTr = document.createElement("tr");
         let newTd1 = document.createElement("td");
         let newTd2 = document.createElement("td");
         let newTd3 = document.createElement("td");
-        newTd1.innerHTML = data[i].id;
-        newTd2.innerHTML = data[i].nick;
-        newTd3.innerHTML = data[i].score;
+        newTd1.innerText = data[i].id;
+        newTd2.innerText = data[i].nick;
+        newTd3.innerText = data[i].score;
         newtTr.appendChild(newTd1);
         newtTr.appendChild(newTd2);
         newtTr.appendChild(newTd3);
@@ -53,19 +57,21 @@ async function actualizeRank() {
     let data = await fetch(rankURL).then(r => r.json());
     //console.log(data['Results']);
 
-    //data['Results'].push({ "nick": playerName, "score": points });
-
-    data['Results'].sort(GetSortOrder("score"));
-    if (data['Results'][6].score <= points) {
-        data['Results'][6].score = points;
-        data['Results'][6].nick = playerName;
+    if (data['Results'].length < 7) {
+        data['Results'].push({ "nick": playerName, "score": points });
         data['Results'].sort(GetSortOrder("score"));
-    }
+    } else {
+        data['Results'].sort(GetSortOrder("score"));
+        if (data['Results'][6].score <= points) {
+            data['Results'][6].score = points;
+            data['Results'][6].nick = playerName;
+            data['Results'].sort(GetSortOrder("score"));
+        }
 
-    for (let i = 0; i < data['Results'].length; i++) {
-        data['Results'][i].id = i + 1;
+        for (let i = 0; i < data['Results'].length; i++) {
+            data['Results'][i].id = i + 1;
+        }
     }
-
     printResults(data['Results']);
 
     //console.log(typeof data);
@@ -82,14 +88,18 @@ async function actualizeRank() {
 }
 
 function initialize() {
+    getPlayerName();
     gameArea.setAttribute("onclick", "missedShoot()");
     gameArea.style.cursor = "crosshair";
-    getPlayerName();
+
     setTimeout("generateBalloons()", 100 + (30 - balloonCounter) * 30);
+
 }
 
 function missedShoot() {
+    if (balloonCounter == 0) return;
     console.log("niecelny strzal");
+    audio2.play();
     missedShoots++;
     shoots++;
     points -= 5;
@@ -114,8 +124,7 @@ function balloonEvent(event, shooted, id) {
         shootedBallons++;
         shoots++;
 
-
-        //audio1.play();
+        audio1.play();
 
         points += (10 - Math.round(10 * (stopTime - startTime - 500) / 2000));
         //setPoints();
@@ -129,11 +138,13 @@ function balloonEvent(event, shooted, id) {
             //generateBalloons();
         }
     }
-    if (balloonCounter < 3) {
+    if (balloonCounter < 20) {
         setTimeout("generateBalloons()", 100 + (30 - balloonCounter) * 20);
     } else {
         console.log("koniec");
         window.confirm("Koniec! Twoj wynik to: " + points);
+        gameArea.removeAttribute('onclick');
+        gameArea.style.cursor = "default";
         actualizeRank();
     }
 
@@ -143,7 +154,9 @@ function balloonEvent(event, shooted, id) {
 //asking player about nick 
 function getPlayerName() {
     playerName = prompt("Podaj swój nick: ");
+    if (playerName === "") return getPlayerName();
     document.getElementById("nickBox").innerHTML = playerName;
+
 }
 
 function actualizeStats() {
@@ -165,7 +178,7 @@ function generateBalloons() {
     new_div.setAttribute("class", "balloon");
     new_div.setAttribute("onclick", 'balloonEvent(event, true, ' + balloonCounter + ', event)');
     new_div.setAttribute("id", balloonCounter);
-    new_div.innerHTML = balloonCounter;
+    //new_div.innerHTML = balloonCounter;
 
     let ballonSize = generateRandomNumber(80, 150);
     new_div.style.width = ballonSize + 'px';
@@ -197,18 +210,10 @@ function getRandomColor() {
 }
 
 
-initialize()
+
 
 function playAgain() {
     playerName = "";
-    startTime = 0;
-    stopTime = 0;
-    currentBallon = 0;
-    balloonCounter = 0;
-    shootedBallons = 0;
-    shoots = 0;
-    missedShoots = 0;
-    points = 0;
     document.getElementById("highcoresHeader").style.visibility = "hidden";
     document.getElementById("playAgainBtn").style.visibility = "hidden";
 
@@ -217,9 +222,26 @@ function playAgain() {
     while (tab.firstChild) {
         tab.removeChild(tab.lastChild);
     }
-    initialize();
+    startTime = 0;
+    stopTime = 0;
+    currentBallon = 0;
+    balloonCounter = 0;
+    shootedBallons = 0;
+    shoots = 0;
+    missedShoots = 0;
+    points = 0;
+    actualizeStats();
+
+    getPlayerName();
+    gameArea.setAttribute("onclick", "missedShoot()");
+    gameArea.style.cursor = "crosshair";
+    actualizeStats();
+
+    setTimeout("generateBalloons()", 100 + (30 - balloonCounter) * 30);
+
 }
 
+initialize()
 
 
 

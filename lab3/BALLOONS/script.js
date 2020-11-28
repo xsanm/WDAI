@@ -73,12 +73,15 @@ function printResults(data) {
         let newTd1 = document.createElement("td");
         let newTd2 = document.createElement("td");
         let newTd3 = document.createElement("td");
+        let newTd4 = document.createElement("td");
         newTd1.innerText = data[i].id;
         newTd2.innerText = data[i].nick;
         newTd3.innerText = data[i].score;
+        newTd4.innerText = data[i].date;
         newtTr.appendChild(newTd1);
         newtTr.appendChild(newTd2);
         newtTr.appendChild(newTd3);
+        newtTr.appendChild(newTd4);
         table.appendChild(newtTr);
     }
 
@@ -116,13 +119,14 @@ async function actualizeRank() {
     //console.log(data['Results']);
 
     if (data['Results'].length < 7) {
-        data['Results'].push({ "nick": playerName, "score": points });
+        data['Results'].push({ "nick": playerName, "score": points, "date": new Date() });
         data['Results'].sort(GetSortOrder("score"));
     } else {
         data['Results'].sort(GetSortOrder("score"));
         if (data['Results'][6].score <= points) {
             data['Results'][6].score = points;
             data['Results'][6].nick = playerName;
+            data['Results'][6].date = new Date();
             data['Results'].sort(GetSortOrder("score"));
         }
 
@@ -252,7 +256,8 @@ function playAgain() {
     setTimeout("generateBalloons()", 100 + (30 - balloonCounter) * 30);
 
 }
-
+let date = new Date();
+console.log(date);
 initialize()
 
 

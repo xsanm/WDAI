@@ -1,38 +1,45 @@
 {
     "Results": [{
             "id": 1,
-            "nick": "slon",
-            "score": 50
+            "nick": "Turbo Gr",
+            "score": 250,
+            "date": "Wed Nov 12 2020 2:27:18 GMT+0100 (czas środkowoeuropejski standardowy)"
         },
         {
             "id": 2,
-            "nick": "qwerty1",
-            "score": 15
+            "nick": "hehehehehe",
+            "score": 143,
+            "date": "Wed Mar 5 2020 12:7:18 GMT+0100 (czas środkowoeuropejski standardowy)"
         },
         {
             "id": 3,
-            "nick": "Turbo Grzegorz",
-            "score": 250
+            "nick": "testowy",
+            "score": 98,
+            "date": "Mon Nov 25 2020 19:27:18 GMT+0100 (czas środkowoeuropejski standardowy)"
         },
         {
             "id": 4,
             "nick": "qaz1wsx2",
-            "score": 90
+            "score": 90,
+            "date": "Wed Nov 16 2020 12:27:18 GMT+0100 (czas środkowoeuropejski standardowy)"
         },
         {
+            "nick": "withoutliveserv",
+            "score": 65,
             "id": 5,
-            "nick": "niYza",
-            "score": 60
+            "date": "Fri Nov 25 2020 16:27:18 GMT+0100 (czas środkowoeuropejski standardowy)"
         },
         {
-            "nick": "tudtudtud",
-            "score": 21,
-            "id": 6
+            "id": 6,
+            "nick": "niYza",
+            "score": 60,
+            "date": "Wed Nov 9 2020 9:27:18 GMT+0100 (czas środkowoeuropejski standardowy)"
         },
         {
             "id": 7,
-            "nick": "a",
-            "score": 3
+            "nick": "slon",
+            "score": 50,
+            "date": "Tue Nov 30 2020 2:27:18 GMT+0100 (czas środkowoeuropejski standardowy)"
         }
     ]
 }

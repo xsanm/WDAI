@@ -1,0 +1,22 @@
+<p>actor works! </p>
+
+<label for="actor-firstname">Podaj imie actora: </label>
+<input type="text" name="actor-firstname" id="fname" (keyup.enter)="showInformations()" #i>
+<br>
+<label for="actor-secondname">Podaj nazwisko actora: </label>
+<input type="text" name="actor-secondname" id="sname" (keyup.enter)="showInformations()" #n>
+<br>
+<label for="film-title">Podaj tytul filmu: </label>
+<input type="text" name="film-title" id="ftitle" (keyup.enter)="showInformations()" #t>
+<br>
+<button (click)="showInformations()">wyswietl informacje o aktorze</button>
+<br>
+
+<p>Actor first name is: {{i.value}} </p>
+<p>Actor second name is: {{n.value}} </p>
+<p>Movie title is: {{t.value}} </p>
+
+<br> {{2 +2}}
+<br> {{ imie.length}}
+<br> {{ imie.toUpperCase()}}
+<br> {{2+3}}

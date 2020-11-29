@@ -1,0 +1,9 @@
+<h2>Parent Component</h2>
+<p>Liczba klikniec: </p>
+{{clicks}}
+
+<app-child 
+(countEvent)="setClicksNumber($event)" 
+(resetEvent)="resetClicksNumber()" 
+[isDisable]="btnIsDisable"
+></app-child>

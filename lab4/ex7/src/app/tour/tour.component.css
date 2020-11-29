@@ -46,3 +46,7 @@
     justify-content: space-between;
     background-color: #e9e3e3;
 }
+
+#buttons > button{
+    margin: 15px;
+}

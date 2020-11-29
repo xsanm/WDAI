@@ -26,17 +26,30 @@ export class TourComponent implements OnInit {
   @Input() tourData: Tour;
   @Output() changeBookedTours = new EventEmitter();
   placesReserved: number = 0;
+  displayMinusButton: boolean = false;
+  displayPlusButton: boolean = true;
+  displayDeleteButton: boolean = true;
 
   ngOnInit(): void {
   }
 
   incrementPlaces() {
-    this.placesReserved += 1;
-    this.changeBookedTours.emit(1);
+    if(this.placesReserved < this.tourData.places) {
+      this.placesReserved += 1;
+      if(this.placesReserved == 1) this.changeBookedTours.emit(1);
+      if(this.placesReserved > 0) this.displayMinusButton = true;
+      if(this.placesReserved == this.tourData.places) this.displayPlusButton = false;
+    }
   }
 
   decrementPlaces() {
-    this.placesReserved -= 1;
-    this.changeBookedTours.emit(-1);
+    if(this.placesReserved > 0) {
+      this.placesReserved -= 1;
+      if(this.placesReserved == 0 ) {
+        this.changeBookedTours.emit(-1);
+        this.displayMinusButton = false;
+      }
+      if(this.placesReserved < this.tourData.places) this.displayPlusButton = true;
+    }
   }
 }

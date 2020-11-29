@@ -1,0 +1,30 @@
+
+<div id="content">
+<div id="top-section"> 
+    <p>Name: {{tourData.name}}</p>
+    <p>rating</p>
+</div>
+<div id="info-sections">
+    <img src="{{tourData.imageURL}}" alt="photo">
+    <div id="info">
+        <p>Destination: {{tourData.destination}}</p>
+        <p>Data rozpoczęcia: {{tourData.dateBegin}}</p>
+        <p>Data zakoczenia: {{tourData.dateEnd}}</p>
+        <p>Opis</p>
+        <p>{{tourData.description}}</p>
+    </div>
+</div>   
+<div id="places-sections">
+    <p>Places: {{placesReserved}}/{{tourData.places}}</p>
+</div>
+<div id="bottom-section">
+    <p>Price: {{tourData.money}}</p>
+    <div id=buttons>
+        <button (click)="incrementPlaces()">dodaj</button>
+        <button (click)="decrementPlaces()">usun</button>
+        <button>usun2</button>
+    </div>
+</div>
+
+</div>
+

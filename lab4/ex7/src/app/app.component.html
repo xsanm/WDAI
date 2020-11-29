@@ -1,0 +1,11 @@
+<h1>Sklep z wycieczkami</h1>
+
+<app-booked-tours [bookedTours]="bookedTours"></app-booked-tours>
+
+<div id="tours">
+  <app-tour 
+  *ngFor="let t of toursData" 
+  [tourData]="t"
+  (changeBookedTours)="changeBookedTours($event)"
+  ></app-tour>
+</div>

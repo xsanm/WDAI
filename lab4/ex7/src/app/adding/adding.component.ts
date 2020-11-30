@@ -20,26 +20,18 @@ import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
 })
 export class AddingComponent implements OnInit {
 
-  constructor() { }
+  constructor() {this.createForm();}
   
-  addingTripForm: FormGroup ;
-  name: FormControl;
-  destination: FormControl;
-  dateBegin: FormControl;
-  dateEnd: FormControl;
-  price: FormControl;
-  places: FormControl;
-  description: FormControl;
+  addingTripForm: FormGroup;
+  name: FormControl = new FormControl();
+  destination: FormControl = new FormControl();
+  dateBegin: FormControl = new FormControl();
+  dateEnd: FormControl = new FormControl();
+  price: FormControl = new FormControl();
+  places: FormControl = new FormControl();
+  description: FormControl = new FormControl();
 
-  createFormControls() {
-    this.name = new FormControl(),
-    this.destination = new FormControl(),
-    this.dateBegin = new FormControl(),
-    this.dateEnd = new FormControl(),
-    this.price = new FormControl(),
-    this.places = new FormControl(),
-    this.description = new FormControl()
-  }
+
 
   createForm() {
     this.addingTripForm = new FormGroup({
@@ -54,15 +46,14 @@ export class AddingComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.createFormControls();
     this.createForm();
   }
   onSubmit() {
-    /*if (0 && this.addingTripForm.valid) {
+    if (this.addingTripForm.valid) {
       console.log("Form Submitted!");
       console.log(this.addingTripForm.value);
       this.addingTripForm.reset();
-    }*/
+    }
     console.log("gsfg");
   }
 }

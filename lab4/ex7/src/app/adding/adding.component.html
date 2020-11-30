@@ -1,5 +1,5 @@
 <p>adding works!</p>
-<form novalidate [formGroup]="addingTripForm" (onsubmit)="onSubmit()">
+<form novalidate [formGroup]="addingTripForm" (submit)="onSubmit()">
    {{addingTripForm.value}}
     <div>
         <label>Tour Name:</label><br>

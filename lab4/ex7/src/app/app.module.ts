@@ -7,6 +7,8 @@ import { TourComponent } from './tour/tour.component';
 import { BookedToursComponent } from './booked-tours/booked-tours.component';
 import { RatingComponent } from './rating/rating.component';
 import { AddingComponent } from './adding/adding.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { AddingComponent } from './adding/adding.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

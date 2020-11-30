@@ -1,1 +1,73 @@
 <p>adding works!</p>
+<form novalidate [formGroup]="addingTripForm" (onsubmit)="onSubmit()">
+   {{addingTripForm.value}}
+    <div>
+        <label>Tour Name:</label><br>
+        <input class="center-input" 
+            id="name" 
+            name="name" 
+            formControlName="name">
+    </div>
+    
+    
+    <div>
+        <label>Destination:</label><br>
+        <input class="center-input" 
+            name="destination" 
+            formControlName="destination">
+    </div>
+    
+    
+    <div>
+        <label>Begin of the trip:</label><br>
+        <input class="center-input"  
+            type="date" 
+            name="dateBegin" 
+            formControlName="dateBegin" 
+            placeholder="dd.mm.yyyy">
+    </div>
+    
+    
+    <div>
+        <label>End of the trip:</label><br>
+        <input class="center-input" 
+            type="date" 
+            name="dateEnd" 
+            formControlName="dateEnd" 
+            placeholder="dd.mm.yyyy">
+    </div>
+    
+    
+    
+    <div>
+        <label>Price:</label><br>
+        <input  class="center-input" 
+        type="number" 
+        name="price" 
+        formControlName="price">
+    </div>
+    
+    
+    <div>
+        <label>Capacity:</label><br>
+        <input class="center-input" 
+            type="number" 
+            name="places" 
+            formControlName="places">
+    </div>
+    
+    
+    <div>
+        <label>Description:</label><br>
+        <textarea class="center-input" 
+        name="description" 
+        cols="25" 
+        rows="10" 
+        formControlName="description"></textarea>
+    </div>
+    
+   
+    
+ 
+    <button class="btn1" type="submit">SUBMIT</button>
+</form>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { Tour } from './tour/tour.component';
 
 import {tours} from './tours'
@@ -8,16 +8,49 @@ import {tours} from './tours'
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit {
   title = 'ex7';
   toursData: Tour[];
   bookedTours: number = 0;
+  maxPriceId: number;
+  minPriceId: number;
 
   constructor() {
     this.toursData = tours;
+    this.setMinMax();
+    
+  }
+
+  setMinMax() {
+    this.maxPriceId = this.toursData[0].id;
+    let maxMoney = this.toursData[0].money;
+    this.minPriceId = this.toursData[0].id;
+    let minMoney = this.toursData[0].money;
+    for(let t of this.toursData) {
+        if(t.money < minMoney) {
+          minMoney = t.money;
+          this.minPriceId = t.id;
+        }
+        if(t.money > maxMoney) {
+          maxMoney = t.money;
+          this.maxPriceId = t.id;
+        }
+    }
+    console.log(this.minPriceId, this.maxPriceId);
+  }
+
+  ngAfterViewInit(): void {
+    //this.setMinMax()
+    
   }
 
   changeBookedTours(e: number){
     this.bookedTours += e;
+  }
+
+  deleteTour(e) {
+    this.setMinMax();
+    //console.log(e);
+    //console.log(this.toursData);
   }
 }

@@ -8,7 +8,7 @@
 #top-section {
     display: flex;
     justify-content: space-between;
-    background-color: #e9e3e3;
+    
 }
 
 
@@ -48,5 +48,46 @@
 }
 
 #buttons > button{
-    margin: 15px;
+    margin: 10px;
+    width: 30px;
+    height: 30px;
+    border-radius: 20%;
+}
+
+#lastPlace {
+    margin: 10px 30px 10px 30px ;
+    padding: 10px;
+    background-color: #5076be;
+    border-radius: 5%;
+    color: white;
+}
+
+#noPlace {
+    margin: 10px 30px 10px 30px ;
+    padding: 10px;
+    background-color: #e06a7a;
+    border-radius: 5%;
+    color: black;
+}
+
+#btnDel {
+    border: none;
+    background-color: #b43131;
+}
+#btnAdd {
+    border: none;
+    background-color: #24a02e;
+}
+#btnOdd {
+    border: none;
+    background-color: #20a5c7;
+}
+.top-section1 {
+    background-color: red;
+}
+.top-section2 {
+    background-color: green;
+}
+.top-section3 {
+    background-color: #e9e3e3;
 }

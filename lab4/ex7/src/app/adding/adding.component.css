@@ -1,0 +1,48 @@
+
+
+
+label {
+    padding: 10px;;
+    letter-spacing: 0.5px;
+    font-size: 16px;
+    
+}
+input, textarea {
+    width: 500px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid rgb(71, 123, 219);
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  input:focus {
+    outline: none !important;
+    border: 3px solid rgb(10, 62, 158);
+  }
+
+.btn1 {
+    width: 100px;;
+    background-color: #1f5f9b;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .btn1:disabled,
+  .btn1[disabled]{
+  background-color: #6e97bd;
+}
+  
+.btn1:hover:enabled {
+    background-color: #05203a;
+  }
+
+.alert {
+    padding: 10px;;
+    color: red;
+
+}

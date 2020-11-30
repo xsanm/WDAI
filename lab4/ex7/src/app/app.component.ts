@@ -39,7 +39,7 @@ export class AppComponent implements AfterViewInit {
           this.maxPriceId = t.id;
         }
     }
-    console.log(this.minPriceId, this.maxPriceId);
+    //console.log(this.minPriceId, this.maxPriceId);
   }
 
   ngAfterViewInit(): void {
@@ -55,5 +55,11 @@ export class AppComponent implements AfterViewInit {
     this.setMinMax();
     //console.log(e);
     //console.log(this.toursData);
+  }
+  addTour(e: Tour) {
+    e.id = this.toursData[this.toursData.length - 1].id + 1;
+    //console.log("id", e.id);
+    this.toursData.push(e);
+    this.setMinMax()
   }
 }

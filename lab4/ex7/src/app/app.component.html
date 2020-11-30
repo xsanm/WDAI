@@ -1,6 +1,6 @@
 <h1>Sklep z wycieczkami</h1>
 
-<app-adding></app-adding>
+
 
 <app-booked-tours [bookedTours]="bookedTours"></app-booked-tours>
 
@@ -14,3 +14,5 @@
   (delTour)="deleteTour($event)"
   ></app-tour>
 </div>
+
+<app-adding (addTour)="addTour($event)"></app-adding>

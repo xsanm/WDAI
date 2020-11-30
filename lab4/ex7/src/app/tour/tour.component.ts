@@ -24,7 +24,7 @@ interface Tour {
 })
 export class TourComponent implements OnInit {
 
-  
+
   
   @Input() tourData: Tour;
   @Input() maxPriceId: number = 0;
@@ -69,7 +69,7 @@ export class TourComponent implements OnInit {
   }
 
   deleteTour(e: number) {
-    console.log(tours);
+    //console.log(tours);
     
    
     for(let i = 0; i < tours.length; i++) {

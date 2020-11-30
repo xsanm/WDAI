@@ -8,6 +8,7 @@ import { BookedToursComponent } from './booked-tours/booked-tours.component';
 import { RatingComponent } from './rating/rating.component';
 import { AddingComponent } from './adding/adding.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CartComponent } from './cart/cart.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     TourComponent,
     BookedToursComponent,
     RatingComponent,
-    AddingComponent
+    AddingComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,

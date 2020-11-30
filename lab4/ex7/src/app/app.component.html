@@ -1,8 +1,10 @@
 <h1>Sklep z wycieczkami</h1>
 
 
-
+<div id="shop">
 <app-booked-tours [bookedTours]="bookedTours"></app-booked-tours>
+<app-cart [cart]="cart" [cartSum]="cartSum"></app-cart>
+</div>
 
 <div id="tours">
   <app-tour 
@@ -10,7 +12,8 @@
   [tourData]="t"
   [maxPriceId] = "maxPriceId"
   [minPriceId] = "minPriceId"
-  (changeBookedTours)="changeBookedTours($event)"
+  (addTourToBasket)="addToBasket($event)"
+  (removeTourFromBasket)="removeFromBasket($event)"
   (delTour)="deleteTour($event)"
   ></app-tour>
 </div>

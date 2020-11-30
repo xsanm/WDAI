@@ -29,7 +29,8 @@ export class TourComponent implements OnInit {
   @Input() tourData: Tour;
   @Input() maxPriceId: number = 0;
   @Input() minPriceId: number = 0;
-  @Output() changeBookedTours = new EventEmitter();
+  @Output() addTourToBasket = new EventEmitter();
+  @Output() removeTourFromBasket = new EventEmitter();
   @Output() delTour = new EventEmitter();
   placesReserved: number = 0;
   displayMinusButton: boolean = false;
@@ -47,7 +48,7 @@ export class TourComponent implements OnInit {
   incrementPlaces() {
     if(this.placesReserved < this.tourData.places) {
       this.placesReserved += 1;
-      this.changeBookedTours.emit(1);
+      this.addTourToBasket.emit(this.tourData);
       if(this.placesReserved > 0) this.displayMinusButton = true;
       if(this.placesReserved == this.tourData.places) this.displayPlusButton = false;
     }
@@ -56,7 +57,7 @@ export class TourComponent implements OnInit {
   decrementPlaces() {
     if(this.placesReserved > 0) {
       this.placesReserved -= 1;
-      this.changeBookedTours.emit(-1);
+      this.removeTourFromBasket.emit(this.tourData);
       if(this.placesReserved == 0 ) {
         this.displayMinusButton = false;
       }

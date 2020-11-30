@@ -1,4 +1,5 @@
 import { AfterViewInit, Component } from '@angular/core';
+import { CartComponent } from './cart/cart.component';
 import { Tour } from './tour/tour.component';
 
 import {tours} from './tours'
@@ -9,12 +10,15 @@ import {tours} from './tours'
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements AfterViewInit {
+  
   title = 'ex7';
   toursData: Tour[];
   bookedTours: number = 0;
   maxPriceId: number;
   minPriceId: number;
   
+  cart: CartElement[] = [];
+  cartSum: number = 0;
 
   constructor() {
     this.toursData = tours;
@@ -47,8 +51,41 @@ export class AppComponent implements AfterViewInit {
     
   }
 
-  changeBookedTours(e: number){
-    this.bookedTours += e;
+
+  addToBasket(e: Tour){
+    this.bookedTours += 1;
+    this.cartSum += e.money;
+    let is = false;
+    for(let c of this.cart) {
+      if(c.id == e.id) {
+        c.elements += 1;
+        is = true;
+      }
+    }
+    if(!is) {
+      this.cart.push({
+        id: e.id,
+        name: e.name,
+        money: e.money,
+        elements: 1
+      });
+    }
+    //console.log(this.cart);
+  }
+
+  removeFromBasket(e: Tour){
+    this.bookedTours -= 1;
+    this.cartSum -= e.money;
+    for(let c = 0; c < this.cart.length; c++) {
+      if(this.cart[c].id == e.id) {
+        this.cart[c].elements -= 1;
+        if(this.cart[c].elements == 0) {
+          this.cart.splice(c, 1);
+        }
+      }
+    }
+    //console.log(this.cart);
+
   }
 
   deleteTour(e: string) {

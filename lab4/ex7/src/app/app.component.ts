@@ -14,9 +14,12 @@ export class AppComponent implements AfterViewInit {
   bookedTours: number = 0;
   maxPriceId: number;
   minPriceId: number;
+  
 
   constructor() {
     this.toursData = tours;
+    this.minPriceId = 0;
+    this.maxPriceId = 0
     this.setMinMax();
     
   }
@@ -48,7 +51,7 @@ export class AppComponent implements AfterViewInit {
     this.bookedTours += e;
   }
 
-  deleteTour(e) {
+  deleteTour(e: string) {
     this.setMinMax();
     //console.log(e);
     //console.log(this.toursData);

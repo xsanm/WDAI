@@ -7,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class BookedToursComponent implements OnInit {
 
-  @Input() bookedTours: Number;
+  @Input() bookedTours: number;
   constructor() { 
     this.bookedTours = 0;
   }

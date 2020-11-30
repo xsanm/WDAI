@@ -26,8 +26,8 @@ export class TourComponent implements OnInit {
 
   
   @Input() tourData: Tour;
-  @Input() maxPriceId: number;
-  @Input() minPriceId: number;
+  @Input() maxPriceId: number = 0;
+  @Input() minPriceId: number = 0;
   @Output() changeBookedTours = new EventEmitter();
   @Output() delTour = new EventEmitter();
   placesReserved: number = 0;
@@ -67,7 +67,7 @@ export class TourComponent implements OnInit {
     this.tourRating = e;
   }
 
-  deleteTour(e) {
+  deleteTour(e: number) {
     console.log(tours);
     
    

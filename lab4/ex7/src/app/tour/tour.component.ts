@@ -12,7 +12,9 @@ interface Tour {
   imageURL: string,
   places: number,
   money: number,
-  description: string
+  description: string,
+  display: boolean,
+  rate: number
 }
 
 
@@ -66,11 +68,11 @@ export class TourComponent implements OnInit {
   }
 
   setRate(e:number) {
-    this.tourRating = e;
+    this.tourData.rate = e;
   }
 
   deleteTour(e: number) {
-    //console.log(tours);
+    console.log(tours);
     
    
     for(let i = 0; i < tours.length; i++) {
@@ -84,6 +86,6 @@ export class TourComponent implements OnInit {
         this.delTour.emit(e);
       }
     }
-    //console.log(tours);
+    console.log(tours);
   }
 }

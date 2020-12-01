@@ -1,0 +1,60 @@
+#filtr-div {
+    display: flex;
+    flex-wrap: wrap;
+}
+.div1 {
+    background-color: black;
+    margin: 1px;
+    width: 20px;
+    height: 20px;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+.filter {
+    margin: 5px;
+    padding: 30px;
+    background-color: #e9e3e3;
+    text-align: center;
+}
+
+li{
+    list-style: none;
+}
+#rate > li {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+}
+
+
+
+button {
+    width: 100px;
+    background-color: #1f5f9b;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+p {
+   font-size: 18px;
+   color: #24a02e;
+}
+
+#t {
+    padding: 10px;
+    font-size: 20px;
+    border-radius: 2%;
+    width: 420px;
+    background-color: rgb(32, 165, 199);
+    color: black;
+}
+
+#r {
+    text-align: center;
+    font-weight: bold;
+    color: dodgerblue;
+}

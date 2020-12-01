@@ -6,9 +6,12 @@
 <app-cart [cart]="cart" [cartSum]="cartSum"></app-cart>
 </div>
 
+<app-fliter [tours]="toursData"></app-fliter>
+
 <div id="tours">
+  <ng-container *ngFor="let t of toursData" >
   <app-tour 
-  *ngFor="let t of toursData" 
+  *ngIf="t.display"
   [tourData]="t"
   [maxPriceId] = "maxPriceId"
   [minPriceId] = "minPriceId"
@@ -16,6 +19,7 @@
   (removeTourFromBasket)="removeFromBasket($event)"
   (delTour)="deleteTour($event)"
   ></app-tour>
+</ng-container>
 </div>
 
 <app-adding (addTour)="addTour($event)"></app-adding>

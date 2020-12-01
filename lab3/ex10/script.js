@@ -80,9 +80,9 @@ function addProducts(cat, data) {
 }
 
 async function initialize() {
-    let cat = await fetch("categories.json").then(r => r.json());
-    let prodA = await fetch("productsA.json").then(r => r.json());
-    let prodB = await fetch("productsB.json").then(r => r.json());
+    let cat = await fetch("https://jsonblob.com/c2c4012e-33be-11eb-9c3a-65710887ddca").then(r => r.json());
+    let prodA = await fetch("https://jsonblob.com/e8ac7114-33be-11eb-9c3a-35ef0b64f011").then(r => r.json());
+    let prodB = await fetch("https://jsonblob.com/f521d5c2-33be-11eb-9c3a-a18c43ae1be4").then(r => r.json());
 
     addCategories(cat);
     addProducts(cat, prodA);

@@ -41,7 +41,8 @@ export class AddingComponent implements OnInit {
       imageURL: "assets/img/tour_pic.jpg",
       places: 0,
       money: 0,
-      description: ""
+      description: "",
+      display: true
   };
 
   addingTripForm: FormGroup;
@@ -64,7 +65,7 @@ export class AddingComponent implements OnInit {
       price: this.price,
       places: this.places,
       description: this.description,
-      imageUrl: this.imageUrl
+      imageUrl: this.imageUrl,
     });
   }
 
@@ -90,7 +91,8 @@ export class AddingComponent implements OnInit {
         imageURL: "assets/img/tour_pic.jpg",
         places: this.addingTripForm.value.places,
         money: this.addingTripForm.value.price,
-        description: this.addingTripForm.value.description
+        description: this.addingTripForm.value.description,
+        display: true
     });
       this.addingTripForm.reset();
     }

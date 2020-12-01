@@ -9,6 +9,11 @@ import { RatingComponent } from './rating/rating.component';
 import { AddingComponent } from './adding/adding.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CartComponent } from './cart/cart.component';
+import { FliterComponent } from './fliter/fliter.component';
+import { TourFilterPipe } from './tour-filter.pipe';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+
 
 
 @NgModule({
@@ -18,13 +23,16 @@ import { CartComponent } from './cart/cart.component';
     BookedToursComponent,
     RatingComponent,
     AddingComponent,
-    CartComponent
+    CartComponent,
+    FliterComponent,
+    TourFilterPipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,5 +1,5 @@
 import { AfterViewInit, Component } from '@angular/core';
-import { CartComponent } from './cart/cart.component';
+import { CartComponent, CartElement } from './cart/cart.component';
 import { Tour } from './tour/tour.component';
 
 import {tours} from './tours'
@@ -12,7 +12,7 @@ import {tours} from './tours'
 export class AppComponent implements AfterViewInit {
   
   title = 'ex7';
-  toursData: Tour[];
+  toursData: Tour[]= tours;
   bookedTours: number = 0;
   maxPriceId: number;
   minPriceId: number;
@@ -88,10 +88,11 @@ export class AppComponent implements AfterViewInit {
 
   }
 
-  deleteTour(e: string) {
+  deleteTour(e: number) {
     this.setMinMax();
-    //console.log(e);
+    console.log(e);
     //console.log(this.toursData);
+
   }
   addTour(e: Tour) {
     e.id = this.toursData[this.toursData.length - 1].id + 1;

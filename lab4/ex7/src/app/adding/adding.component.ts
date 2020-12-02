@@ -32,11 +32,14 @@ export class AddingComponent implements OnInit {
   
   @Output() addTour = new EventEmitter();
 
+  dateSent = new Date;
+  dateSent2 = new Date;
+
   newTour: Tour = {
       id: 1,
       name: '',
       destination: '',
-      dateBegin: "",
+      dateBegin: '',
       dateEnd: "",
       imageURL: "assets/img/tour_pic.jpg",
       places: 0,
@@ -71,6 +74,10 @@ export class AddingComponent implements OnInit {
 
   ngOnInit(): void {
     this.createForm();
+  }
+
+  dateBeginChange(e: any) {
+    this.dateSent2 = e.target.value;
   }
 
   

@@ -25,12 +25,14 @@
         <input class="center-input"  
             type="date" 
             name="dateBegin" 
+            (change)="dateBeginChange($event)"
             formControlName="dateBegin" 
+            min="{{dateSent|date:'yyyy-MM-dd'}}" 
+            max="{{addingTripForm.value.dateEnd|date:'yyyy-MM-dd'}}" 
             placeholder="dd.mm.yyyy">
         <div *ngIf="dateBegin.invalid && dateBegin.touched"
             class="alert alert-danger">
             <div *ngIf="dateBegin.errors.required"> Begin Date is required. </div>
-            <div *ngIf="dateBegin.errors.invalidDateBegin"> Begin Date can't be from past</div>
         </div>
     </div>
     
@@ -41,6 +43,7 @@
             type="date" 
             name="dateEnd" 
             formControlName="dateEnd" 
+            min="{{dateSent2|date:'yyyy-MM-dd'}}" 
             placeholder="dd.mm.yyyy">
         <div *ngIf="dateEnd.invalid && dateEnd.touched"
             class="alert alert-danger">

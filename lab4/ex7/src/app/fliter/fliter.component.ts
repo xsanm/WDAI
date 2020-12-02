@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Pipe, NgModule } from '@angular/core';
+import { Component, Input, OnInit, Pipe, NgModule, Output, EventEmitter } from '@angular/core';
 import { Tour } from '../tour/tour.component';
 import { BrowserModule } from '@angular/platform-browser'
 import { FormControl } from '@angular/forms';
@@ -16,7 +16,7 @@ export class FliterComponent implements OnInit {
 //pokazywanie najwiekszej i najmnijeszej po filtrowaniu
 
   @Input() tours : Tour[] = [];
-
+  @Output() setMinMax2 = new EventEmitter();
 
   toppings = new FormControl();
   toppingList: string[] = [];
@@ -96,6 +96,7 @@ export class FliterComponent implements OnInit {
 
   apllyFilters() {
 
+    let tab: number[] =[];
     //console.log(this.choosedRatings, this.choosedDestinations);
     //console.log(this.dateBeg, this.tours[0].dateBegin);
     for(let t of this.tours) {
@@ -109,10 +110,14 @@ export class FliterComponent implements OnInit {
       
       ){
         t.display = true;
+        tab.push(t.id);
       } else {
         t.display = false;
       }
     }
+
+    this.setMinMax2.emit(tab);
+
     //this.countRanges();
   }
 

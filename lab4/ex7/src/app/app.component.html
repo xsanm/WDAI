@@ -6,7 +6,9 @@
 <app-cart [cart]="cart" [cartSum]="cartSum"></app-cart>
 </div>
 
-<app-fliter [tours]="toursData"></app-fliter>
+<app-fliter [tours]="toursData"
+      (setMinMax2)="setMinMax2($event)"
+></app-fliter>
 
 <div id="tours">
   <ng-container *ngFor="let t of toursData" >

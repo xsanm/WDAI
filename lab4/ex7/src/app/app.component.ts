@@ -100,4 +100,24 @@ export class AppComponent implements AfterViewInit {
     this.toursData.push(e);
     this.setMinMax()
   }
+
+  setMinMax2(tab: number[]) {
+    if(tab.length == 0) return;
+    this.maxPriceId = this.toursData[tab[0]].id;
+    let maxMoney = this.toursData[tab[0]].money;
+    this.minPriceId = this.toursData[tab[0]].id;
+    let minMoney = this.toursData[tab[0]].money;
+    for(let t of this.toursData) if(tab.includes(t.id)){
+        if(t.money < minMoney) {
+          minMoney = t.money;
+          this.minPriceId = t.id;
+        }
+        if(t.money > maxMoney) {
+          maxMoney = t.money;
+          this.maxPriceId = t.id;
+        }
+    }
+    //console.log(this.minPriceId, this.maxPriceId);
+  }
+
 }

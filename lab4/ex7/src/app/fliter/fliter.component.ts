@@ -11,9 +11,6 @@ import { FormControl } from '@angular/forms';
 export class FliterComponent implements OnInit {
 
 
-//TODO
-//przy usuwaniu aktualizuje filtry
-//pokazywanie najwiekszej i najmnijeszej po filtrowaniu
 
   @Input() tours : Tour[] = [];
   @Output() setMinMax2 = new EventEmitter();

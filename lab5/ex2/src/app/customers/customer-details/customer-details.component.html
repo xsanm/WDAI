@@ -1,0 +1,19 @@
+<div *ngIf="customer" id="student">
+  <div>
+    <label>Imie: </label> {{customer.name}}
+  </div>
+  <div>
+    <label>Wiek: </label> {{customer.age}}
+  </div>
+  <div>
+    <label>Zaliczyl: </label> {{customer.active}}
+  </div>
+
+  <span class="button is-small btn-primary" *ngIf='customer.active' (click)='updateActive(false)'>Nie zaliczyl</span>
+
+  <span class="button is-small btn-primary" *ngIf='!customer.active' (click)='updateActive(true)'>Zaliczyl</span>
+
+  <span class="button is-small btn-danger" (click)='deleteCustomer()'>Delete</span>
+
+  <hr />
+</div>

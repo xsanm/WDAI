@@ -1,3 +1,4 @@
+
 #tours {
     display: flex;
     flex-wrap: wrap;
@@ -6,4 +7,5 @@
 
 #shop {
     display: flex;
+    flex-wrap: wrap;
 }

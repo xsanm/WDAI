@@ -45,10 +45,11 @@ export class AddingComponent implements OnInit {
       places: 0,
       money: 0,
       description: "",
-      display: true
+      display: true,
+      rate: 0
   };
 
-  addingTripForm: FormGroup;
+  addingTripForm: FormGroup = Object();
   name: FormControl = new FormControl("",  Validators.required);
   destination: FormControl = new FormControl("",  Validators.required);
   dateBegin: FormControl = new FormControl("",  [Validators.required, dateBeginValidator]);
@@ -56,7 +57,7 @@ export class AddingComponent implements OnInit {
   price: FormControl = new FormControl("",  [Validators.required, Validators.min(0)]);
   places: FormControl = new FormControl("",  [Validators.required, Validators.min(0)]);
   description: FormControl = new FormControl("",  Validators.required);
-  imageUrl: FormControl = new FormControl();
+  imageUrl: FormControl = new FormControl("",  Validators.required);
 
 
   createForm() {
@@ -95,7 +96,7 @@ export class AddingComponent implements OnInit {
         destination: this.addingTripForm.value.destination,
         dateBegin: this.addingTripForm.value.dateBegin,
         dateEnd: this.addingTripForm.value.dateEnd,
-        imageURL: "assets/img/tour_pic.jpg",
+        imageURL: this.imageUrl.value.imageUrl,
         places: this.addingTripForm.value.places,
         money: this.addingTripForm.value.price,
         description: this.addingTripForm.value.description,

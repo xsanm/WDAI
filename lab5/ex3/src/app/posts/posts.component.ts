@@ -38,7 +38,7 @@ export class PostsComponent implements OnInit {
       body: b
     };
     console.log(this.postService.addPost(this.newPost));
-    this.posts.push(this.newPost);
+    this.posts.unshift(this.newPost);
   }
 
 }

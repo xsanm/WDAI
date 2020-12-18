@@ -1,0 +1,28 @@
+<div id="wrap">
+  <div>
+      <label>Title</label><br>
+      <input class="center-input" 
+          id="title" 
+          name="title" 
+          #title>  
+  </div>
+  
+  <div>
+    <label>Post body:</label><br>
+    <textarea class="center-input" 
+    name="pbody" 
+    cols="25" 
+    rows="10" #pbody></textarea>
+   </div>
+  <button class="btn1" (click)="onSubmit(title.value, pbody.value)">POST on server</button>
+
+</div>
+
+
+<div class="posts" *ngFor="let post of posts">
+    <div class="post">
+      <h4> {{ post.title | uppercase}}</h4>
+      <p> User: {{ post.userId }} </p>
+      <p> {{ post.body}} </p>
+    </div>
+  </div>

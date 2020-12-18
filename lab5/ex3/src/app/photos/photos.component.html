@@ -1,0 +1,6 @@
+<div class="photos" *ngFor="let photo of photos">
+    <div class="photo">
+      <h4 class="card-title">{{ photo.title | uppercase}}</h4>
+      <img [src]=photo.thumbnailUrl [alt]=photo.id>
+    </div>
+  </div>

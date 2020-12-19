@@ -29,6 +29,7 @@
 <div id="bottom-section">
     <p>Price: {{tourData.money | currency}}</p>
     <div id=buttons>
+        <button id="btnDetails" (click)="showDetails()">Details</button>
         <button id="btnDel" (click)="deleteTour(tourData.id)" [style.visibility]="displayDeleteButton ? 'visible' : 'hidden'">D</button>
         <button id="btnAdd"(click)="incrementPlaces()" [style.visibility]="displayPlusButton ? 'visible' : 'hidden'">+</button>
         <button id="btnOdd" (click)="decrementPlaces()" [style.visibility]="displayMinusButton ? 'visible' : 'hidden'">-</button>

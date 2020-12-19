@@ -20,6 +20,7 @@ import { CommonModule } from '@angular/common';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule} from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
+import { DetailsComponent } from './details/details.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { environment } from '../environments/environment';
     CartComponent,
     FliterComponent,
     TourFilterPipe,
-    ShopComponent
+    ShopComponent,
+    DetailsComponent
   ],
   imports: [
     BrowserModule,

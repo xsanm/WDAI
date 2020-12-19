@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 
 import { CommonModule } from '@angular/common';  
 import { BrowserModule } from '@angular/platform-browser';
+import { Tour } from '../tour/tour.component';
+import { LocalService } from '../local.service';
 
 export interface CartElement {
   id: number,
@@ -19,10 +21,12 @@ export interface CartElement {
 })
 export class CartComponent implements OnInit {
 
-  @Input() cart: CartElement[] = [];
+  @Input() cart: Tour[] = [];
   @Input() cartSum: number = 0;
 
-  constructor() { }
+  constructor(private cartSerivce: LocalService) {
+    this.cart = cartSerivce.getTours();
+  }
 
   
 

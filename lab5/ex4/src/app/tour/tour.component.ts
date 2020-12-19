@@ -3,6 +3,8 @@ import { tours } from '../tours';
 import { CommonModule } from '@angular/common';  
 import { BrowserModule } from '@angular/platform-browser';
 import { DbService } from '../db.service';
+import { LocalService } from '../local.service';
+import { Router } from '@angular/router';
 
 export {Tour};
 
@@ -31,7 +33,7 @@ export class TourComponent implements OnInit {
 
 
   
-  @Input() tourData: Tour;
+  @Input() tourData: any;
   @Input() maxPriceId: number = 0;
   @Input() minPriceId: number = 0;
   @Output() addTourToBasket = new EventEmitter();
@@ -43,7 +45,7 @@ export class TourComponent implements OnInit {
   displayDeleteButton: boolean = true;
   tourRating: number = 1;
 
-  constructor(private dbService: DbService) {
+  constructor(private dbService: DbService, private cartSerivce: LocalService, private router: Router) {
     
   }
 
@@ -53,7 +55,8 @@ export class TourComponent implements OnInit {
   incrementPlaces() {
     if(this.placesReserved < this.tourData.places) {
       this.placesReserved += 1;
-      this.addTourToBasket.emit(this.tourData);
+      //this.addTourToBasket.emit(this.tourData);
+      this.cartSerivce.addTour(this.tourData);
       if(this.placesReserved > 0) this.displayMinusButton = true;
       if(this.placesReserved == this.tourData.places) this.displayPlusButton = false;
     }
@@ -62,7 +65,8 @@ export class TourComponent implements OnInit {
   decrementPlaces() {
     if(this.placesReserved > 0) {
       this.placesReserved -= 1;
-      this.removeTourFromBasket.emit(this.tourData);
+      //this.removeTourFromBasket.emit(this.tourData);
+      this.cartSerivce.removeTour(this.tourData);
       if(this.placesReserved == 0 ) {
         this.displayMinusButton = false;
       }
@@ -72,9 +76,16 @@ export class TourComponent implements OnInit {
 
   setRate(e:number) {
     this.tourData.rate = e;
+    this.dbService
+      .updateRate(this.tourData.key, { rate: e })
   }
 
   deleteTour(e: number) {
     this.dbService.deleteTour(this.tourData.key);
   }
+  showDetails(){
+    this.router.navigate(['details-component', this.tourData]);
+  }
+
+
 }

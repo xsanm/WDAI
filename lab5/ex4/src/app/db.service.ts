@@ -7,16 +7,13 @@ import { Tour } from './tour/tour.component';
 })
 export class DbService {
 
+
   private dbPath = 'tours';
   toursRef: AngularFireList<Tour>;
 
 
   constructor(private db: AngularFireDatabase) {
     this.toursRef = db.list(this.dbPath)
-  }
-
-  createTour(tour: Tour): void {
-    this.toursRef.push({...tour})
   }
 
   getToursList()  {
@@ -26,6 +23,14 @@ export class DbService {
   deleteTour(key: string) {
     this.toursRef.remove(key);
   }
+  
+  updateRate(key: string, value: any) {
+    this.toursRef.update(key, value);
+    //console.log(key);
+  } 
 
+  createTour(tour: Tour): void {
+    this.toursRef.push({...tour})
+  }
 
 }

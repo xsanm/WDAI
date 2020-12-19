@@ -6,6 +6,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { DbService } from '../db.service';
 import { CartElement } from '../cart/cart.component';
 import { map } from 'rxjs/operators';
+import { Tour } from '../tour/tour.component';
 
 @Component({
   selector: 'app-shop',
@@ -15,7 +16,7 @@ import { map } from 'rxjs/operators';
 export class ShopComponent implements OnInit {
 
   title = 'ex7';
-  toursData: Tour[];
+  toursData: Tour[] = [];
   bookedTours: number = 0;
   maxPriceId: number;
   minPriceId: number;
@@ -34,7 +35,7 @@ export class ShopComponent implements OnInit {
     this.serverService.getToursList().snapshotChanges().pipe(
       map(changes => changes.map(c => ({key : c.payload.key, ...c.payload.val()})))
     ).subscribe(tours =>{
-      this.toursData = tours;
+      this.toursData = tours as Tour[];
     });
   }
 

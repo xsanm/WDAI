@@ -85,6 +85,10 @@
 .top-section1 {
     background-color: red;
 }
+#btnDetails {
+    width: 300px;
+    background-color: #caa232;
+}
 .top-section2 {
     background-color: green;
 }

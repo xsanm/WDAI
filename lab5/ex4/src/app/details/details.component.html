@@ -1,0 +1,37 @@
+<p>details works!</p>
+
+<div id="content">
+    <div id="top-section"> 
+        <p>Name: {{tour.name }}</p>
+        <app-rating (setRate)="setRate($event)" [rateVal]="tour.rate"></app-rating>
+    </div>
+    <div id="info-sections">
+        <img src="{{tour.imageURL}}" alt="photo">
+        <div id="info">
+            <p>Destination: {{tour.destination}}</p>
+            <p>Data rozpoczęcia: {{tour.dateBegin}}</p>
+            <p>Data zakoczenia: {{tour.dateEnd}}</p>
+            <p>Opis</p>
+            <p>{{tour.description}}</p>
+        </div>
+    </div>   
+    <div id="places-sections">
+        <p>Places: {{tour}}/{{tour.places}}</p>
+        <div *ngIf="tour.places - placesReserved == 1" id="lastPlace">
+            Last free place!
+        </div>
+        <div *ngIf="tour.places - placesReserved == 0" id="noPlace">
+            No places availalble!
+        </div>
+    </div>
+    <div id="bottom-section">
+        <p>Price: {{tour.money | currency}}</p>
+        <div id=buttons>
+            <button id="btnDetails" (click)="showDetails()">Details</button>
+            <button id="btnDel" (click)="deleteTour(tourData.id)" [style.visibility]="displayDeleteButton ? 'visible' : 'hidden'">D</button>
+            <button id="btnAdd"(click)="incrementPlaces()" [style.visibility]="displayPlusButton ? 'visible' : 'hidden'">+</button>
+            <button id="btnOdd" (click)="decrementPlaces()" [style.visibility]="displayMinusButton ? 'visible' : 'hidden'">-</button>
+            
+        </div>
+    </div>
+    

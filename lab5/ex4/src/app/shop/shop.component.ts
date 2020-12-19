@@ -3,6 +3,9 @@ import { tours } from '../tours';
 
 import { CommonModule } from '@angular/common';  
 import { BrowserModule } from '@angular/platform-browser';
+import { DbService } from '../db.service';
+import { CartElement } from '../cart/cart.component';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-shop',
@@ -12,7 +15,7 @@ import { BrowserModule } from '@angular/platform-browser';
 export class ShopComponent implements OnInit {
 
   title = 'ex7';
-  toursData: Tour[]= tours;
+  toursData: Tour[];
   bookedTours: number = 0;
   maxPriceId: number;
   minPriceId: number;
@@ -20,15 +23,20 @@ export class ShopComponent implements OnInit {
   cart: CartElement[] = [];
   cartSum: number = 0;
 
-  constructor() {
-    this.toursData = tours;
+  constructor(private serverService: DbService) {
     this.minPriceId = 0;
     this.maxPriceId = 0
     //this.setMinMax();
-    
+    this.getToursList();
   }
 
-
+  getToursList() {
+    this.serverService.getToursList().snapshotChanges().pipe(
+      map(changes => changes.map(c => ({key : c.payload.key, ...c.payload.val()})))
+    ).subscribe(tours =>{
+      this.toursData = tours;
+    });
+  }
 
   ngOnInit(): void {
   }

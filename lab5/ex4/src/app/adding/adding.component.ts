@@ -117,7 +117,7 @@ export class AddingComponent implements OnInit {
         destination: this.addingTripForm.value.destination,
         dateBegin: this.addingTripForm.value.dateBegin,
         dateEnd: this.addingTripForm.value.dateEnd,
-        imageURL: this.imageUrl.value.imageUrl,
+        imageURL: this.addingTripForm.value.imageUrl,
         places: this.addingTripForm.value.places,
         money: this.addingTripForm.value.price,
         description: this.addingTripForm.value.description,

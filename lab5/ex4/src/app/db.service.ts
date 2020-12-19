@@ -18,4 +18,13 @@ export class DbService {
   createTour(tour: Tour): void {
     this.toursRef.push({...tour})
   }
+
+  getToursList()  {
+    
+    //this.toursRef = this.baza.list('students').snapshotChanges();
+    //console.log(this.baza.list);
+    return this.toursRef;
+  }
+
+
 }

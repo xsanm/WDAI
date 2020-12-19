@@ -2,6 +2,7 @@ import { Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import { tours } from '../tours';
 import { CommonModule } from '@angular/common';  
 import { BrowserModule } from '@angular/platform-browser';
+import { DbService } from '../db.service';
 
 export {Tour};
 
@@ -42,7 +43,7 @@ export class TourComponent implements OnInit {
   displayDeleteButton: boolean = true;
   tourRating: number = 1;
 
-  constructor() {
+  constructor(private dbService: DbService) {
     
   }
 
@@ -74,20 +75,6 @@ export class TourComponent implements OnInit {
   }
 
   deleteTour(e: number) {
-    console.log(tours);
-    
-   
-    for(let i = 0; i < tours.length; i++) {
-      if(tours[i].id == e) {
-        //console.log(tours[i]);
-        //delete tours[i];
-        tours.splice(i, 1);
-        while(this.placesReserved > 0) {
-          this.decrementPlaces();
-        }
-        this.delTour.emit(e);
-      }
-    }
-    console.log(tours);
+    this.dbService.deleteTour(this.tourData.key);
   }
 }

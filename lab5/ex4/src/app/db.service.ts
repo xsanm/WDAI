@@ -20,10 +20,11 @@ export class DbService {
   }
 
   getToursList()  {
-    
-    //this.toursRef = this.baza.list('students').snapshotChanges();
-    //console.log(this.baza.list);
     return this.toursRef;
+  }
+
+  deleteTour(key: string) {
+    this.toursRef.remove(key);
   }
 
 

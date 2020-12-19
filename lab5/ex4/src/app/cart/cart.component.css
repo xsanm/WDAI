@@ -1,0 +1,25 @@
+:host{
+    margin: 20px;
+    background-color: #e9e3e3;
+    width: 600px;
+}
+
+.sec {
+    margin: 0;
+    padding: 10px 30px;
+    background-color: #69cbe4;
+    font-size: 20px;
+}
+
+ul {
+    margin: 10px;
+}
+
+li {
+    list-style: none;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 40px;
+    padding: 5px 20px ;
+}

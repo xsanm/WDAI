@@ -1,0 +1,9 @@
+<p class="sec">Cart</p>
+
+<ul>
+    <li *ngFor="let t of cart" > <div>{{t.name}}</div> <div>{{t.elements}}</div></li>
+</ul>
+
+<div class="sec">
+    {{cartSum | currency}}
+</div>

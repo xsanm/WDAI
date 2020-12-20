@@ -5,6 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { DbService } from '../db.service';
 import { LocalService } from '../local.service';
 import { Router } from '@angular/router';
+import { CartElement } from '../cart/cart.component';
 
 export {Tour};
 
@@ -44,34 +45,54 @@ export class TourComponent implements OnInit {
   displayPlusButton: boolean = true;
   displayDeleteButton: boolean = true;
   tourRating: number = 1;
+  cartData: CartElement;
 
   constructor(private dbService: DbService, private cartSerivce: LocalService, private router: Router) {
     
   }
 
   ngOnInit(): void {
+    this.placesReserved = this.dbService.getCartElements(this.tourData.id);
+    this.setButtons();
+    if(this.placesReserved > 0) this.displayMinusButton = true;
+    this.cartData = {
+      tourKey: this.tourData.key,
+      id: this.tourData.id,
+      name: this.tourData.name,
+      money: this.tourData.money,
+      elements: 1
+    }
+  }
+
+  setButtons() {
+    if(this.placesReserved > 0) this.displayMinusButton = true;
+    if(this.placesReserved == this.tourData.places) this.displayPlusButton = false;
+    if(this.placesReserved == 0 ) this.displayMinusButton = false;
+    if(this.placesReserved < this.tourData.places) this.displayPlusButton = true;
+
   }
 
   incrementPlaces() {
+    console.log(this.placesReserved);
+    this.dbService.updateLocalCartList();
     if(this.placesReserved < this.tourData.places) {
       this.placesReserved += 1;
+      //console.log(this.tourData.key);
       //this.addTourToBasket.emit(this.tourData);
-      this.cartSerivce.addTour(this.tourData);
-      if(this.placesReserved > 0) this.displayMinusButton = true;
-      if(this.placesReserved == this.tourData.places) this.displayPlusButton = false;
+      this.dbService.addToCart(this.cartData, this.placesReserved);
+      this.setButtons();
     }
+    //console.log(this.cartData.elements);
   }
 
   decrementPlaces() {
     if(this.placesReserved > 0) {
       this.placesReserved -= 1;
       //this.removeTourFromBasket.emit(this.tourData);
-      this.cartSerivce.removeTour(this.tourData);
-      if(this.placesReserved == 0 ) {
-        this.displayMinusButton = false;
+      this.dbService.deleteFromCart(this.cartData, this.placesReserved);
+      //this.cartSerivce.removeTour(this.tourData);
+      this.setButtons();
       }
-      if(this.placesReserved < this.tourData.places) this.displayPlusButton = true;
-    }
   }
 
   setRate(e:number) {

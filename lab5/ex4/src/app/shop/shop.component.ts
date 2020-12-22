@@ -18,8 +18,8 @@ export class ShopComponent implements OnInit {
   title = 'ex7';
   toursData: Tour[] = [];
   bookedTours: number = 0;
-  maxPriceId: number;
-  minPriceId: number;
+  maxPriceId: number = 0;
+  minPriceId: number = 0;
   
   cart: CartElement[] = [];
   cartSum: number = 0;
@@ -27,8 +27,9 @@ export class ShopComponent implements OnInit {
   constructor(private serverService: DbService) {
     this.minPriceId = 0;
     this.maxPriceId = 0
-    //this.setMinMax();
     this.getToursList();
+   
+
   }
 
   getToursList() {
@@ -38,8 +39,22 @@ export class ShopComponent implements OnInit {
       this.toursData = tours as Tour[];
     });
   }
+  getBookedTours() {
+    return this.serverService.bookedTours();
+  }
+  getMostExpensiveID() {
+    return this.serverService.getMostExpensiveID();
+  }
+  getLeastExpensiveID() {
+    return this.serverService.getLeastExpensiveID();
+  }
+
+
 
   ngOnInit(): void {
+    this.minPriceId = this.serverService.getLeastExpensiveID();
+    this.maxPriceId = this.serverService.getMostExpensiveID();
+    //console.log(this.minPriceId);
   }
 
 }

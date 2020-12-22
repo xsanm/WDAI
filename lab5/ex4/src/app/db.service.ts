@@ -1,3 +1,4 @@
+import { identifierModuleUrl } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { map } from 'rxjs/operators';
@@ -9,6 +10,8 @@ import { tours } from './tours';
   providedIn: 'root'
 })
 export class DbService {
+  
+  
   
   
   
@@ -27,6 +30,14 @@ export class DbService {
     this.updateLocalCartList();
   }
 
+
+  bookedTours() {
+    let sum = 0;
+    for(let c of this.cart) {
+      sum += c.elements;
+    }
+    return sum;
+  }
 
 
   getToursList()  {
@@ -54,6 +65,14 @@ export class DbService {
       map(changes => changes.map(c => ({key : c.payload.key, ...c.payload.val()})))
     ).subscribe(cart =>{
       this.cart = cart as CartElement[];
+    });
+  }
+
+  updateLocalTourList(){
+    this.toursRef.snapshotChanges().pipe(
+      map(changes => changes.map(c => ({key : c.payload.key, ...c.payload.val()})))
+    ).subscribe(tour =>{
+      this.tours = tour as Tour[];
     });
   }
 
@@ -98,6 +117,7 @@ export class DbService {
   }
 
   getCartElements(id: number) {
+    this.updateLocalTourList();
     this.updateLocalCartList();
     for(let c of this.cart) {
       if(c.id === id) {
@@ -107,6 +127,30 @@ export class DbService {
     return 0;
   }
 
+
+  getLeastExpensiveID() {
+    this.updateLocalTourList();
+    let id = 0;
+    let mx = 0;
+    for(let t of this.tours) {
+      if(t.money > mx) {
+        mx = t.money;
+        id = t.id;
+      }
+    }
+    return id;
+  }
+  getMostExpensiveID() {
+    let id = 0;
+    let mx = 1000000000;
+    for(let t of this.tours) {
+      if(t.money < mx) {
+        mx = t.money;
+        id = t.id;
+      }
+    }
+    return id;
+  }
 
 
 }

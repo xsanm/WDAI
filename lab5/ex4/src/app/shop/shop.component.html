@@ -1,14 +1,9 @@
-<p>shop works!</p>
+<app-booked-tours [bookedTours] = getBookedTours()></app-booked-tours>
 <div id="tours">
     <ng-container *ngFor="let t of toursData" >
     <app-tour 
     *ngIf="t.display"
     [tourData]="t"
-    [maxPriceId] = "maxPriceId"
-    [minPriceId] = "minPriceId"
-    (addTourToBasket)="addToBasket($event)"
-    (removeTourFromBasket)="removeFromBasket($event)"
-    (delTour)="deleteTour($event)"
     ></app-tour>
   </ng-container>
   </div>

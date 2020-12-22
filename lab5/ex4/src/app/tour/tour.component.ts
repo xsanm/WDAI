@@ -41,8 +41,6 @@ export class TourComponent implements OnInit {
 
   
   @Input() tourData: any;
-  @Input() maxPriceId: number = 0;
-  @Input() minPriceId: number = 0;
   @Output() addTourToBasket = new EventEmitter();
   @Output() removeTourFromBasket = new EventEmitter();
   @Output() delTour = new EventEmitter();
@@ -57,7 +55,6 @@ export class TourComponent implements OnInit {
   cartData!: CartElement;
 
   constructor(private dbService: DbService, private cartSerivce: LocalService, private router: Router) {
-    
   }
 
   ngOnInit(): void {
@@ -95,15 +92,12 @@ export class TourComponent implements OnInit {
       this.dbService.addToCart(this.cartData, this.placesReserved);
       this.setButtons();
     }
-    //console.log(this.cartData.elements);
   }
 
   decrementPlaces() {
     if(this.placesReserved > 0) {
       this.placesReserved -= 1;
-      //this.removeTourFromBasket.emit(this.tourData);
       this.dbService.deleteFromCart(this.cartData, this.placesReserved);
-      //this.cartSerivce.removeTour(this.tourData);
       this.setButtons();
       }
   }

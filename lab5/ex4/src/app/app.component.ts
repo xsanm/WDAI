@@ -61,14 +61,7 @@ export class AppComponent implements AfterViewInit {
         is = true;
       }
     }
-    if(!is) {
-      this.cart.push({
-        id: e.id,
-        name: e.name,
-        money: e.money,
-        elements: 1
-      });
-    }
+    
     //console.log(this.cart);
   }
 

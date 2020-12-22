@@ -10,6 +10,7 @@ import { CartElement } from '../cart/cart.component';
 export {Tour};
 
 interface Tour {
+  key: string;
   id: number,
   name: string,
   destination: string,
@@ -21,6 +22,11 @@ interface Tour {
   description: string,
   display: boolean,
   rate: number
+}
+
+export interface TourData {
+  tour: Tour,
+  cart: CartElement
 }
 
 
@@ -45,7 +51,10 @@ export class TourComponent implements OnInit {
   displayPlusButton: boolean = true;
   displayDeleteButton: boolean = true;
   tourRating: number = 1;
-  cartData: CartElement;
+  tour!: TourData;
+
+
+  cartData!: CartElement;
 
   constructor(private dbService: DbService, private cartSerivce: LocalService, private router: Router) {
     
@@ -61,6 +70,10 @@ export class TourComponent implements OnInit {
       name: this.tourData.name,
       money: this.tourData.money,
       elements: 1
+    }
+    this.tour = {
+      tour: this.tourData,
+      cart: this.cartData
     }
   }
 
@@ -105,7 +118,7 @@ export class TourComponent implements OnInit {
     this.dbService.deleteTour(this.tourData.key);
   }
   showDetails(){
-    this.router.navigate(['details-component', this.tourData]);
+    this.router.navigate(['details-component', {tour: JSON.stringify(this.tourData), cart: JSON.stringify(this.cartData) }]);
   }
 
 

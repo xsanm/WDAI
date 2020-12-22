@@ -5,7 +5,6 @@
     'top-section2':tourData.id == minPriceId,
     'top-section3':tourData.id != maxPriceId && tourData.id != minPriceId}"> 
     <p>Name: {{tourData.name }}</p>
-    <app-rating (setRate)="setRate($event)" [rateVal]="tourData.rate"></app-rating>
 </div>
 <div id="info-sections">
     <img src="{{tourData.imageURL}}" alt="photo">

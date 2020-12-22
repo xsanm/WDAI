@@ -9,6 +9,9 @@ import { tours } from './tours';
   providedIn: 'root'
 })
 export class DbService {
+  
+  
+  
 
 
   private toursPath = 'tours';
@@ -16,12 +19,15 @@ export class DbService {
   toursRef: AngularFireList<Tour>;
   cartRef: AngularFireList<CartElement>;
   cart: CartElement[] = [];
+  tours: Tour[] = [];
 
   constructor(private db: AngularFireDatabase) {
     this.toursRef = db.list(this.toursPath);
     this.cartRef = db.list(this.cartPath);
     this.updateLocalCartList();
   }
+
+
 
   getToursList()  {
     return this.toursRef;
@@ -92,6 +98,7 @@ export class DbService {
   }
 
   getCartElements(id: number) {
+    this.updateLocalCartList();
     for(let c of this.cart) {
       if(c.id === id) {
         return c.elements;

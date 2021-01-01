@@ -2,6 +2,18 @@ import { Component, Input, OnInit, Pipe, NgModule, Output, EventEmitter } from '
 import { Tour } from '../tour/tour.component';
 import { BrowserModule } from '@angular/platform-browser'
 import { FormControl } from '@angular/forms';
+import { DbService } from '../db.service';
+import { map } from 'rxjs/operators';
+import { ConsoleReporter } from 'jasmine';
+
+export interface FilterRanges {
+  destinations: string[],
+  ratings: number[],
+  minMoney:number,
+  maxMoney:number,
+  dateBeg: string ,
+  dateEnd: string
+}
 
 @Component({
   selector: 'app-fliter',
@@ -11,31 +23,53 @@ import { FormControl } from '@angular/forms';
 export class FliterComponent implements OnInit {
 
 
+  
+
 
   @Input() tours : Tour[] = [];
-  @Output() setMinMax2 = new EventEmitter();
+  @Output() useFilters = new EventEmitter();
 
-  toppings = new FormControl();
-  toppingList: string[] = [];
+  toursWithFilters: number[] = []
+
+  filters!: FilterRanges;
 
   destinations: string[] = []
   ratings: number[] = []
-  choosedDestinations: string[] = []
-  choosedRatings: number[] = []
+  //choosedDestinations: string[] = []
+  //: number[] = []
   minMoney:number = 10
   maxMoney:number = 100
-  choosedMinMoney: number = 0;
-  choosedMaxMoney: number = 0;
+  //choosedMinMoney: number = 0;
+  //choosedMaxMoney: number = 0;
   value1 = 40;
   value2 = 40;
   dateSent = new Date;
   dateSent2 = new Date;
-  dateBeg: string = "";
-  dateEnd: string = "";
+  //dateBeg: string = "";
+  //dateEnd: string = "";
   
-  constructor() {
+  constructor(private dbService: DbService) {
+    this.filters = {
+      destinations: [],
+      ratings: [],
+      minMoney: 0,
+      maxMoney: 0,
+      dateBeg: "" ,
+      dateEnd: ""
+    }
+    //console.log(dbService.getToursList());
+    /*this.dbService.getToursList().snapshotChanges().pipe(
+      map(changes => changes.map(c => ({key : c.payload.key, ...c.payload.val()})))
+    ).subscribe(tours =>{
+      this.tours = tours as Tour[];
+    });*/
     
+  }
 
+  setTours(tours: Tour[]) {
+    this.tours = tours;
+    console.log(this.tours);
+    this.countRanges();
   }
 
   countRanges() {
@@ -52,15 +86,15 @@ export class FliterComponent implements OnInit {
       }
     }
     //console.log(this.ratings);
-    this.choosedMinMoney = this.minMoney;
-    this.choosedMaxMoney = this.maxMoney;
+    this.filters.minMoney = this.minMoney;
+    this.filters.maxMoney = this.maxMoney;
   }
 
   deleteRanges() {
     this.destinations = [];
     this.ratings = [];
-    this.dateBeg=  "";
-    this.dateEnd = "";
+    //this.dateBeg=  "";
+    //this.dateEnd = "";
     this.dateSent = new Date;
     this.dateSent2 = new Date;
     this.ngOnInit();
@@ -71,20 +105,22 @@ export class FliterComponent implements OnInit {
     this.countRanges();
     this.dateSent = new Date;
     this.dateSent2 = new Date;
-
+    //for(let t of this.tours) this.toursWithFilters.push(t.id);
+    //this.dbService.setFiltered(this.toursWithFilters);
+    console.log(this.tours);
   }
 
   onDestinationFilterChange(e: any){
     let dest = e.target.name ;
     if(e.target.checked){
-      this.choosedDestinations.push(dest);
+      this.filters.destinations.push(dest);
      
     } else {
-      for(let i = 0; i < this.choosedDestinations.length; i++) {
-        if(this.choosedDestinations[i] == dest) {
+      for(let i = 0; i < this.filters.destinations.length; i++) {
+        if(this.filters.destinations[i] == dest) {
           //console.log(tours[i]);
           //delete tours[i];
-          this.choosedDestinations.splice(i, 1);
+          this.filters.destinations.splice(i, 1);
         }
       }
     }
@@ -93,34 +129,43 @@ export class FliterComponent implements OnInit {
 
   apllyFilters() {
 
+    this.dbService.applyFilters(this.filters);
+    this.useFilters.emit();
+    return;
+
     let tab: number[] =[];
+    this.toursWithFilters = [];
     //console.log(this.choosedRatings, this.choosedDestinations);
     //console.log(this.dateBeg, this.tours[0].dateBegin);
     for(let t of this.tours) {
-      if((this.choosedDestinations.length == 0 || this.choosedDestinations.includes(t.destination)) &&
-        t.money >= this.choosedMinMoney &&
-        t.money <= this.choosedMaxMoney &&
-        (this.choosedRatings.length == 0  || this.choosedRatings.includes(t.rate)) &&
-        (this.dateBeg == "" || new Date(t.dateBegin) >= new Date(this.dateBeg)) &&
-        (this.dateEnd == "" || new Date(t.dateEnd) <= new Date(this.dateEnd))
+      if((this.filters.destinations.length == 0 || this.filters.destinations.includes(t.destination)) &&
+        t.money >= this.filters.minMoney &&
+        t.money <= this.filters.maxMoney &&
+        (this.filters.ratings.length == 0  || this.filters.ratings.includes(t.rate)) &&
+        (this.filters.dateBeg == "" || new Date(t.dateBegin) >= new Date(this.filters.dateBeg)) &&
+        (this.filters.dateEnd == "" || new Date(t.dateEnd) <= new Date(this.filters.dateEnd))
       
       
       ){
-        t.display = true;
+        //t.display = true;
+        this.toursWithFilters.push(t.id);
         tab.push(t.id);
       } else {
-        t.display = false;
+        //t.display = false;
       }
     }
 
-    this.setMinMax2.emit(tab);
+    this.dbService.setFiltered(this.toursWithFilters);
+
+    this.useFilters.emit();
+
 
     //this.countRanges();
   }
 
   removeFilters() {
     for(let t of this.tours) {
-      t.display = true;
+      this.toursWithFilters.push(t.id);
     }
     this.deleteRanges();
     this.countRanges();
@@ -129,24 +174,24 @@ export class FliterComponent implements OnInit {
   changeMinMoney(e: any) {
       //console.log(e.target.value);
       this.value1 = parseInt(e.target.value);
-      this.choosedMinMoney = parseInt(e.target.value);
+      this.filters.minMoney = parseInt(e.target.value);
       this.apllyFilters();
   }
 
   changeMaxMoney(e: any) {
     //console.log(typeof e.target.value);
     this.value2 = parseInt(e.target.value);
-    this.choosedMaxMoney = parseInt(e.target.value);
+    this.filters.maxMoney = parseInt(e.target.value);
     this.apllyFilters();
 }
 
 selectRating(ev: any, e: number) {
     if(ev.target.checked){
-      this.choosedRatings.push(e);
+      this.filters.ratings.push(e);
     } else {
-      for(let i = 0; i < this.choosedRatings.length; i++) {
-        if(this.choosedRatings[i] == e) {
-          this.choosedRatings.splice(i, 1);
+      for(let i = 0; i < this.filters.ratings.length; i++) {
+        if(this.filters.ratings[i] == e) {
+          this.filters.ratings.splice(i, 1);
         }
       }
     }
@@ -154,13 +199,13 @@ selectRating(ev: any, e: number) {
   }
 
   dateBeginChange(e: any) {
-    this.dateBeg = e.target.value;
+    this.filters.dateBeg = e.target.value;
     this.dateSent2 = e.target.value;
     this.apllyFilters();
   }
 
   dateEndChange(e: any) {
-    this.dateEnd = e.target.value;
+    this.filters.dateEnd = e.target.value;
     this.apllyFilters();
   }
 

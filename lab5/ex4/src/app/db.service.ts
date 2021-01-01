@@ -3,13 +3,16 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { map } from 'rxjs/operators';
 import { CartComponent, CartElement } from './cart/cart.component';
+import { FilterRanges } from './fliter/fliter.component';
 import { Tour } from './tour/tour.component';
 import { tours } from './tours';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class DbService {
+  
   
   
   
@@ -23,13 +26,57 @@ export class DbService {
   cartRef: AngularFireList<CartElement>;
   cart: CartElement[] = [];
   tours: Tour[] = [];
+  toursWithFilters: number[] = [];
 
   constructor(private db: AngularFireDatabase) {
     this.toursRef = db.list(this.toursPath);
     this.cartRef = db.list(this.cartPath);
     this.updateLocalCartList();
+    this.updateLocalTourList();
+    
+    for(let t of this.tours) this.toursWithFilters.push(t.id);
   }
 
+  getToursLocalList(): Tour[] {
+    this.updateLocalTourList();
+    return this.tours;
+  }
+  
+
+  setFiltered(toursWithFilters: number[]) {
+    console.log("siema");
+    console.log(toursWithFilters);
+    this.toursWithFilters = toursWithFilters;
+  }
+
+  ifToDisplay(id:number){
+    //this.updateLocalTourList();
+    return true;
+    console.log(this.tours);
+    console.log(this.toursWithFilters);
+    return this.toursWithFilters.includes(id);
+  }
+
+  applyFilters(filters: FilterRanges) {
+
+    for(let t of this.tours) {
+      if((filters.destinations.length == 0 || filters.destinations.includes(t.destination)) &&
+        t.money >= filters.minMoney &&
+        t.money <= filters.maxMoney &&
+        (filters.ratings.length == 0  || filters.ratings.includes(t.rate)) &&
+        (filters.dateBeg == "" || new Date(t.dateBegin) >= new Date(filters.dateBeg)) &&
+        (filters.dateEnd == "" || new Date(t.dateEnd) <= new Date(filters.dateEnd))
+      
+      
+      ){
+        t.display = true;
+        //this.toursWithFilters.push(t.id);
+        //tab.push(t.id);
+      } else {
+        t.display = false;
+      }
+    }
+  }
 
   bookedTours() {
     let sum = 0;

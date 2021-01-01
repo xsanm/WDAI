@@ -7,6 +7,8 @@ import { DbService } from '../db.service';
 import { CartElement } from '../cart/cart.component';
 import { map } from 'rxjs/operators';
 import { Tour } from '../tour/tour.component';
+import { FilterRanges, FliterComponent } from '../fliter/fliter.component';
+import { ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-shop',
@@ -23,13 +25,13 @@ export class ShopComponent implements OnInit {
   
   cart: CartElement[] = [];
   cartSum: number = 0;
+  @ViewChild(FliterComponent) filter!:FliterComponent ;
 
-  constructor(private serverService: DbService) {
+
+  constructor(public serverService: DbService) {
     this.minPriceId = 0;
     this.maxPriceId = 0
     this.getToursList();
-   
-
   }
 
   getToursList() {
@@ -37,7 +39,9 @@ export class ShopComponent implements OnInit {
       map(changes => changes.map(c => ({key : c.payload.key, ...c.payload.val()})))
     ).subscribe(tours =>{
       this.toursData = tours as Tour[];
+      this.filter.setTours(this.toursData);
     });
+    
   }
   getBookedTours() {
     return this.serverService.bookedTours();
@@ -49,6 +53,17 @@ export class ShopComponent implements OnInit {
     return this.serverService.getLeastExpensiveID();
   }
 
+  returnToursList(){
+    //this.getToursList();
+    console.log(this.toursData);
+    return this.toursData;
+  }
+
+  useFilters() {
+    this.getToursList();
+  }
+
+  
 
 
   ngOnInit(): void {

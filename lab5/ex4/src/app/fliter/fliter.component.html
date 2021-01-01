@@ -15,14 +15,14 @@
     <div class="filter">
         <p>Wybierz min cene podrozy</p>
 
-        {{minMoney}}<input type="range" min="{{minMoney}}" max="{{choosedMaxMoney}}" value="{{minMoney}}" (input)="changeMinMoney($event)">{{choosedMaxMoney}}
-      <br><div id="r"> {{choosedMinMoney}}</div> 
+        {{minMoney}}<input type="range" min="{{minMoney}}" max="{{this.filters.maxMoney}}" value="{{minMoney}}" (input)="changeMinMoney($event)">{{this.filters.maxMoney}}
+      <br><div id="r"> {{this.filters.minMoney}}</div> 
     </div>
     <div class="filter">
         <p>Wybierz max cene podrozy</p>
 
-        {{choosedMinMoney}}<input type="range" min="{{choosedMinMoney}}" max="{{maxMoney}}" value="{{maxMoney}}" (input)="changeMaxMoney($event)">{{maxMoney}}
-      <br><div id="r"> {{choosedMaxMoney}}</div> 
+        {{this.filters.minMoney}}<input type="range" min="{{this.filters.minMoney}}" max="{{maxMoney}}" value="{{maxMoney}}" (input)="changeMaxMoney($event)">{{maxMoney}}
+      <br><div id="r"> {{this.filters.maxMoney}}</div> 
     </div>
 
 
@@ -43,7 +43,7 @@
             type="date" 
             name="dateEnd" 
             min="{{dateSent|date:'yyyy-MM-dd'}}" 
-            max="{{dateEnd|date:'yyyy-MM-dd'}}" 
+            max="{{this.filters.dateEnd|date:'yyyy-MM-dd'}}" 
             (change)="dateBeginChange($event)"
             placeholder="dd.mm.yyyy">
     </div>

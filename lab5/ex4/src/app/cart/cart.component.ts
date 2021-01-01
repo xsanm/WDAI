@@ -29,11 +29,7 @@ export class CartComponent implements OnInit {
   cart: CartElement[] = [];
 
   constructor(private cartSerivce: DbService) {
-    cartSerivce.getCartList().snapshotChanges().pipe(
-      map(changes => changes.map(c => ({key : c.payload.key, ...c.payload.val()})))
-    ).subscribe(cart =>{
-      this.cart = cart as CartElement[];
-    });
+    
 
   }
 
@@ -45,6 +41,11 @@ export class CartComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.cartSerivce.getCartList().snapshotChanges().pipe(
+      map(changes => changes.map(c => ({key : c.payload.key, ...c.payload.val()})))
+    ).subscribe(cart =>{
+      this.cart = cart as CartElement[];
+    });
   }
 
 }

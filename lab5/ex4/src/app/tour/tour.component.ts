@@ -10,7 +10,6 @@ import { CartElement } from '../cart/cart.component';
 export {Tour};
 
 interface Tour {
-  key: string;
   id: number,
   name: string,
   destination: string,

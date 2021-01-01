@@ -12,6 +12,9 @@ import { tours } from './tours';
   providedIn: 'root'
 })
 export class DbService {
+  getFreeID(): number {
+    return this.tours[this.tours.length - 1].id + 1;
+  }
   
   
   
@@ -38,7 +41,7 @@ export class DbService {
   }
 
   getToursLocalList(): Tour[] {
-    this.updateLocalTourList();
+    //this.updateLocalTourList();
     return this.tours;
   }
   
@@ -58,14 +61,14 @@ export class DbService {
   }
 
   applyFilters(filters: FilterRanges) {
-
+    console.log(filters);
     for(let t of this.tours) {
       if((filters.destinations.length == 0 || filters.destinations.includes(t.destination)) &&
         t.money >= filters.minMoney &&
         t.money <= filters.maxMoney &&
-        (filters.ratings.length == 0  || filters.ratings.includes(t.rate)) &&
-        (filters.dateBeg == "" || new Date(t.dateBegin) >= new Date(filters.dateBeg)) &&
-        (filters.dateEnd == "" || new Date(t.dateEnd) <= new Date(filters.dateEnd))
+        (filters.ratings.length == 0  || filters.ratings.includes(t.rate))// &&
+        //(filters.dateBeg == "" || new Date(t.dateBegin) >= new Date(filters.dateBeg)) &&
+        //(filters.dateEnd == "" || new Date(t.dateEnd) <= new Date(filters.dateEnd))
       
       
       ){
@@ -93,6 +96,8 @@ export class DbService {
 
   deleteTour(key: string) {
     this.toursRef.remove(key);
+    //this.updateLocalCartList();
+    //this.updateLocalTourList();
   }
   
   updateRate(key: string, value: any) {
@@ -100,7 +105,10 @@ export class DbService {
   } 
 
   createTour(tour: Tour): void {
+    //tour.id = this.tours[this.tours.length - 1].id + 1;
     this.toursRef.push({...tour})
+    //this.updateLocalCartList();
+    //this.updateLocalTourList();
   }
 
   getCartList()  {
@@ -126,8 +134,8 @@ export class DbService {
 
   addToCart(tour: CartElement, el: number): void {
     this.updateLocalCartList();
-    //console.log(tour);
-    //console.log(this.cart);
+    console.log(tour);
+    console.log(this.cart);
 
     for(let c of this.cart) {
       if(c.id === tour.id) {
@@ -138,7 +146,7 @@ export class DbService {
     //(if(this.cart.includes(tour)) {
     //  this.cartRef.update(tour.key, { elements: tour.elements + 1 });
     //} else {
-      this.cartRef.push({...tour})
+    this.cartRef.push({...tour})
     //}
     
   }

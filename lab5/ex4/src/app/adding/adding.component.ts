@@ -112,7 +112,7 @@ export class AddingComponent implements OnInit {
       console.log(typeof this.addingTripForm.value.dateBegin);
 
       this.addingService.createTour( {
-        id: 1,
+        id: this.addingService.getFreeID(),
         name: this.addingTripForm.value.name,
         destination: this.addingTripForm.value.destination,
         dateBegin: this.addingTripForm.value.dateBegin,

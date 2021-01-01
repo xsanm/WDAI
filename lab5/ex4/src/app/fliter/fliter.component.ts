@@ -68,7 +68,6 @@ export class FliterComponent implements OnInit {
 
   setTours(tours: Tour[]) {
     this.tours = tours;
-    console.log(this.tours);
     this.countRanges();
   }
 
@@ -131,6 +130,7 @@ export class FliterComponent implements OnInit {
 
     this.dbService.applyFilters(this.filters);
     this.useFilters.emit();
+    console.log("SIEMA");
     return;
 
     let tab: number[] =[];

@@ -41,7 +41,7 @@ export class ShopComponent implements OnInit {
       this.toursData = tours as Tour[];
       this.filter.setTours(this.toursData);
     });
-    
+    console.log("ggg");
   }
   getBookedTours() {
     return this.serverService.bookedTours();

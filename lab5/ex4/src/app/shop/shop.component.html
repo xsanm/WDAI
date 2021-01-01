@@ -1,6 +1,6 @@
 <app-booked-tours [bookedTours] = getBookedTours()></app-booked-tours>
 <app-fliter 
-      (setMinMuseFiltersx2)="useFilters()"
+      (getToursList)="useFilters()"
 ></app-fliter>
 <div id="tours">
     <ng-container *ngFor="let t of toursData" >

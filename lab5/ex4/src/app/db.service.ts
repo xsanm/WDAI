@@ -12,16 +12,12 @@ import { tours } from './tours';
   providedIn: 'root'
 })
 export class DbService {
-  getFreeID(): number {
-    return this.tours[this.tours.length - 1].id + 1;
-  }
   
   
   
   
   
   
-
 
   private toursPath = 'tours';
   private cartPath = 'cart';
@@ -32,12 +28,19 @@ export class DbService {
   toursWithFilters: number[] = [];
 
   constructor(private db: AngularFireDatabase) {
+    for(let i = 0; i <= 30; i++) this.toursWithFilters.push(i);
     this.toursRef = db.list(this.toursPath);
     this.cartRef = db.list(this.cartPath);
     this.updateLocalCartList();
     this.updateLocalTourList();
     
-    for(let t of this.tours) this.toursWithFilters.push(t.id);
+  }
+
+  getToDisplayList(): number[] {
+    return this.toursWithFilters;
+  }
+  getFreeID(): number {
+    return this.tours[this.tours.length - 1].id + 1;
   }
 
   getToursLocalList(): Tour[] {
@@ -46,11 +49,7 @@ export class DbService {
   }
   
 
-  setFiltered(toursWithFilters: number[]) {
-    console.log("siema");
-    console.log(toursWithFilters);
-    this.toursWithFilters = toursWithFilters;
-  }
+
 
   ifToDisplay(id:number){
     //this.updateLocalTourList();
@@ -61,7 +60,9 @@ export class DbService {
   }
 
   applyFilters(filters: FilterRanges) {
-    console.log(filters);
+    //console.log(filters);
+    this.toursWithFilters = [];
+
     for(let t of this.tours) {
       if((filters.destinations.length == 0 || filters.destinations.includes(t.destination)) &&
         t.money >= filters.minMoney &&
@@ -72,11 +73,11 @@ export class DbService {
       
       
       ){
-        t.display = true;
-        //this.toursWithFilters.push(t.id);
+        //t.display = true;
+        this.toursWithFilters.push(t.id);
         //tab.push(t.id);
       } else {
-        t.display = false;
+        //t.display = false;
       }
     }
   }
@@ -128,6 +129,7 @@ export class DbService {
       map(changes => changes.map(c => ({key : c.payload.key, ...c.payload.val()})))
     ).subscribe(tour =>{
       this.tours = tour as Tour[];
+      //for(let t of this.tours) if(!this.toursWithFilters.includes(t.id)) this.toursWithFilters.push(t.id);
     });
   }
 

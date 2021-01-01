@@ -1,11 +1,11 @@
 <app-booked-tours [bookedTours] = getBookedTours()></app-booked-tours>
 <app-fliter 
-      (getToursList)="useFilters()"
+      (useFilters)="getToursList()"
 ></app-fliter>
 <div id="tours">
     <ng-container *ngFor="let t of toursData" >
     <app-tour 
-    *ngIf="t.display"
+    *ngIf="ifDiplay(t.id)"
     [tourData]="t"
     ></app-tour>
   </ng-container>

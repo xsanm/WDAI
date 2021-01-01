@@ -22,9 +22,24 @@ export class ShopComponent implements OnInit {
   bookedTours: number = 0;
   maxPriceId: number = 0;
   minPriceId: number = 0;
+
+  mockTour = {
+    id: 1,
+    name: '',
+    destination: '',
+    dateBegin: '',
+    dateEnd: "",
+    imageURL: "assets/img/tour_pic.jpg",
+    places: 0,
+    money: 0,
+    description: "",
+    display: true,
+    rate: 0
+  };
   
   cart: CartElement[] = [];
   cartSum: number = 0;
+  toDisplay!: number[];
   @ViewChild(FliterComponent) filter!:FliterComponent ;
 
 
@@ -41,7 +56,11 @@ export class ShopComponent implements OnInit {
       this.toursData = tours as Tour[];
       this.filter.setTours(this.toursData);
     });
+    this.toDisplay = this.serverService.getToDisplayList();
     console.log("ggg");
+    console.log(this.toDisplay);
+    this.toursData.push(this.mockTour);
+    console.log(this.toursData);
   }
   getBookedTours() {
     return this.serverService.bookedTours();
@@ -55,7 +74,7 @@ export class ShopComponent implements OnInit {
 
   returnToursList(){
     //this.getToursList();
-    console.log(this.toursData);
+    //console.log(this.toursData);
     return this.toursData;
   }
 
@@ -63,6 +82,11 @@ export class ShopComponent implements OnInit {
     this.getToursList();
   }
 
+  ifDiplay(id: number) {
+    console.log("sdgasg");
+    console.log(this.toDisplay);
+    return this.toDisplay.includes(id);
+  }
   
 
 

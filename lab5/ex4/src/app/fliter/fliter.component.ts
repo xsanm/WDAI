@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser'
 import { FormControl } from '@angular/forms';
 import { DbService } from '../db.service';
 import { map } from 'rxjs/operators';
-import { ConsoleReporter } from 'jasmine';
 
 export interface FilterRanges {
   destinations: string[],

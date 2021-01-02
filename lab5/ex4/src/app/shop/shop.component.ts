@@ -46,6 +46,7 @@ export class ShopComponent implements OnInit {
   constructor(public serverService: DbService) {
     this.minPriceId = 0;
     this.maxPriceId = 0
+    serverService.resetFilters();
     this.getToursList();
   }
 
@@ -58,9 +59,9 @@ export class ShopComponent implements OnInit {
     });
     this.toDisplay = this.serverService.getToDisplayList();
     console.log("ggg");
-    console.log(this.toDisplay);
-    this.toursData.push(this.mockTour);
-    console.log(this.toursData);
+    //console.log(this.toDisplay);
+    //this.toursData.push(this.mockTour);
+    //console.log(this.toursData);
   }
   getBookedTours() {
     return this.serverService.bookedTours();

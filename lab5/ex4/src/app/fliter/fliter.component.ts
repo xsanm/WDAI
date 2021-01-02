@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser'
 import { FormControl } from '@angular/forms';
 import { DbService } from '../db.service';
 import { map } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 export interface FilterRanges {
   destinations: string[],
@@ -36,22 +37,22 @@ export class FliterComponent implements OnInit {
   ratings: number[] = []
   //choosedDestinations: string[] = []
   //: number[] = []
-  minMoney:number = 10
-  maxMoney:number = 100
+  minMoney:number = 1000000
+  maxMoney:number = 0
   //choosedMinMoney: number = 0;
   //choosedMaxMoney: number = 0;
-  value1 = 40;
-  value2 = 40;
+  value1 = 67;
+  value2 = 3255;
   dateSent = new Date;
   dateSent2 = new Date;
   //dateBeg: string = "";
   //dateEnd: string = "";
   
-  constructor(private dbService: DbService) {
+  constructor(private dbService: DbService, private router: Router) {
     this.filters = {
       destinations: [],
       ratings: [],
-      minMoney: 0,
+      minMoney: 100000,
       maxMoney: 0,
       dateBeg: "" ,
       dateEnd: ""
@@ -68,10 +69,13 @@ export class FliterComponent implements OnInit {
   setTours(tours: Tour[]) {
     this.tours = tours;
     this.countRanges();
+    //this.filters.minMoney = this.minMoney;
+    //this.filters.maxMoney = this.maxMoney;
   }
 
   countRanges() {
-    for(let t of this.tours) if(t.display){
+    this.toursWithFilters = this.dbService.getToDisplayList();
+    for(let t of this.tours) {
       if(!this.destinations.includes(t.destination)) 
         this.destinations.push(t.destination);
       if(!this.ratings.includes(t.rate)) 
@@ -163,6 +167,12 @@ export class FliterComponent implements OnInit {
   }
 
   removeFilters() {
+    this.dbService.resetFilters();
+    this.useFilters.emit();
+    //this.router.navigate(['adding-component']);
+    //this.router.navigate(['shop-component']);
+    location.reload();
+    return;
     for(let t of this.tours) {
       this.toursWithFilters.push(t.id);
     }

@@ -16,13 +16,13 @@
         <p>Wybierz min cene podrozy</p>
 
         {{minMoney}}<input type="range" min="{{minMoney}}" max="{{this.filters.maxMoney}}" value="{{minMoney}}" (input)="changeMinMoney($event)">{{this.filters.maxMoney}}
-      <br><div id="r"> {{this.filters.minMoney}}</div> 
+      <br><div id="r"> {{this.value1}}</div> 
     </div>
     <div class="filter">
         <p>Wybierz max cene podrozy</p>
 
         {{this.filters.minMoney}}<input type="range" min="{{this.filters.minMoney}}" max="{{maxMoney}}" value="{{maxMoney}}" (input)="changeMaxMoney($event)">{{maxMoney}}
-      <br><div id="r"> {{this.filters.maxMoney}}</div> 
+      <br><div id="r"> {{this.value2}}</div> 
     </div>
 
 

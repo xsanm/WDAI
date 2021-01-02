@@ -18,6 +18,7 @@ export class DbService {
   
   
   
+  
 
   private toursPath = 'tours';
   private cartPath = 'cart';
@@ -48,7 +49,10 @@ export class DbService {
     return this.tours;
   }
   
-
+  resetFilters() {
+    this.toursWithFilters = [];
+    for(let i = 0; i <= 30; i++) this.toursWithFilters.push(i);
+  }
 
 
   ifToDisplay(id:number){
@@ -67,9 +71,9 @@ export class DbService {
       if((filters.destinations.length == 0 || filters.destinations.includes(t.destination)) &&
         t.money >= filters.minMoney &&
         t.money <= filters.maxMoney &&
-        (filters.ratings.length == 0  || filters.ratings.includes(t.rate))// &&
-        //(filters.dateBeg == "" || new Date(t.dateBegin) >= new Date(filters.dateBeg)) &&
-        //(filters.dateEnd == "" || new Date(t.dateEnd) <= new Date(filters.dateEnd))
+        (filters.ratings.length == 0  || filters.ratings.includes(t.rate)) &&
+        (filters.dateBeg == "" || new Date(t.dateBegin) >= new Date(filters.dateBeg)) &&
+        (filters.dateEnd == "" || new Date(t.dateEnd) <= new Date(filters.dateEnd))
       
       
       ){

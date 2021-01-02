@@ -58,10 +58,7 @@ export class ShopComponent implements OnInit {
       this.filter.setTours(this.toursData);
     });
     this.toDisplay = this.serverService.getToDisplayList();
-    console.log("ggg");
-    //console.log(this.toDisplay);
-    //this.toursData.push(this.mockTour);
-    //console.log(this.toursData);
+
   }
   getBookedTours() {
     return this.serverService.bookedTours();
@@ -84,16 +81,14 @@ export class ShopComponent implements OnInit {
   }
 
   ifDiplay(id: number) {
-    console.log("sdgasg");
-    console.log(this.toDisplay);
     return this.toDisplay.includes(id);
   }
   
 
 
   ngOnInit(): void {
-    this.minPriceId = this.serverService.getLeastExpensiveID();
-    this.maxPriceId = this.serverService.getMostExpensiveID();
+    this.minPriceId = this.serverService.getMostExpensiveID();
+    this.maxPriceId = this.serverService.getLeastExpensiveID();
     //console.log(this.minPriceId);
   }
 

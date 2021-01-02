@@ -1,5 +1,7 @@
 import { AfterViewInit, Component } from '@angular/core';
+import { map } from 'rxjs/operators';
 import { CartComponent, CartElement } from './cart/cart.component';
+import { DbService } from './db.service';
 import { Tour } from './tour/tour.component';
 import {tours} from './tours'
 
@@ -11,105 +13,19 @@ import {tours} from './tours'
 export class AppComponent implements AfterViewInit {
   
   title = 'ex7';
-  toursData: Tour[]= tours;
-  bookedTours: number = 0;
-  maxPriceId: number;
-  minPriceId: number;
-  
-  cart: CartElement[] = [];
-  cartSum: number = 0;
 
-  constructor() {
-    this.toursData = tours;
-    this.minPriceId = 0;
-    this.maxPriceId = 0
-    this.setMinMax();
+  constructor(public serverService: DbService) {
+  
+    
     
   }
 
-  setMinMax() {
-    this.maxPriceId = this.toursData[0].id;
-    let maxMoney = this.toursData[0].money;
-    this.minPriceId = this.toursData[0].id;
-    let minMoney = this.toursData[0].money;
-    for(let t of this.toursData) {
-        if(t.money < minMoney) {
-          minMoney = t.money;
-          this.minPriceId = t.id;
-        }
-        if(t.money > maxMoney) {
-          maxMoney = t.money;
-          this.maxPriceId = t.id;
-        }
-    }
-    //console.log(this.minPriceId, this.maxPriceId);
-  }
+
 
   ngAfterViewInit(): void {
     //this.setMinMax()
     
   }
 
-
-  addToBasket(e: Tour){
-    this.bookedTours += 1;
-    this.cartSum += e.money;
-    let is = false;
-    for(let c of this.cart) {
-      if(c.id == e.id) {
-        c.elements += 1;
-        is = true;
-      }
-    }
-    
-    //console.log(this.cart);
-  }
-
-  removeFromBasket(e: Tour){
-    this.bookedTours -= 1;
-    this.cartSum -= e.money;
-    for(let c = 0; c < this.cart.length; c++) {
-      if(this.cart[c].id == e.id) {
-        this.cart[c].elements -= 1;
-        if(this.cart[c].elements == 0) {
-          this.cart.splice(c, 1);
-        }
-      }
-    }
-    //console.log(this.cart);
-
-  }
-
-  deleteTour(e: number) {
-    this.setMinMax();
-    console.log(e);
-    //console.log(this.toursData);
-
-  }
-  addTour(e: Tour) {
-    e.id = this.toursData[this.toursData.length - 1].id + 1;
-    //console.log("id", e.id);
-    this.toursData.push(e);
-    this.setMinMax()
-  }
-
-  setMinMax2(tab: number[]) {
-    if(tab.length == 0) return;
-    this.maxPriceId = this.toursData[tab[0]].id;
-    let maxMoney = this.toursData[tab[0]].money;
-    this.minPriceId = this.toursData[tab[0]].id;
-    let minMoney = this.toursData[tab[0]].money;
-    for(let t of this.toursData) if(tab.includes(t.id)){
-        if(t.money < minMoney) {
-          minMoney = t.money;
-          this.minPriceId = t.id;
-        }
-        if(t.money > maxMoney) {
-          maxMoney = t.money;
-          this.maxPriceId = t.id;
-        }
-    }
-    //console.log(this.minPriceId, this.maxPriceId);
-  }
 
 }

@@ -32,7 +32,7 @@
             placeholder="dd.mm.yyyy">
         <div *ngIf="dateBegin.invalid && dateBegin.touched"
             class="alert alert-danger">
-            <div *ngIf="dateBegin.errors.required"> Begin Date is required. </div>
+            <div *ngIf="dateBegin.errors?.required"> Begin Date is required. </div>
         </div>
     </div>
     
@@ -47,8 +47,8 @@
             placeholder="dd.mm.yyyy">
         <div *ngIf="dateEnd.invalid && dateEnd.touched"
             class="alert alert-danger">
-            <div *ngIf="dateEnd.errors.required"> End Date is required. </div>
-            <div *ngIf="dateEnd.errors.invalidDateEnd"> End Date must can't be from past</div>
+            <div *ngIf="dateEnd.errors?.required"> End Date is required. </div>
+            <div *ngIf="dateEnd.errors?.invalidDateEnd"> End Date must can't be from past</div>
         </div>
     </div>
     
@@ -63,8 +63,8 @@
 
         <div *ngIf="price.invalid && price.touched"
             class="alert alert-danger">
-            <div *ngIf="price.errors.required"> Price is required. </div>
-            <div *ngIf="price.errors.min"> Price must be additional</div>
+            <div *ngIf="price.errors?.required"> Price is required. </div>
+            <div *ngIf="price.errors?.min"> Price must be additional</div>
         </div>
     </div>
     
@@ -77,8 +77,8 @@
             formControlName="places">
         <div *ngIf="places.invalid && places.touched"
             class="alert alert-danger">
-            <div *ngIf="places.errors.required"> Number of places is required. </div>
-            <div *ngIf="places.errors.min"> Number of places must be additional</div>
+            <div *ngIf="places.errors?.required"> Number of places is required. </div>
+            <div *ngIf="places.errors?.min"> Number of places must be additional</div>
         </div>
     </div>
     

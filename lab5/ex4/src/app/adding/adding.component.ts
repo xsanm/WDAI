@@ -13,7 +13,6 @@ import {
 import { BrowserModule } from "@angular/platform-browser";
 import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
 import { Tour } from "../tour/tour.component";
-import { tours } from "../tours";
 import { CommonModule } from '@angular/common';
 import { AddingService } from "../adding.service";
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -33,22 +32,6 @@ export class AddingComponent implements OnInit {
 
   constructor(private addingService: DbService) {
     this.createForm();
-    /*for(let t of tours){
-      this.addingService.createTour( {
-        id: t.id,
-        name: t.name,
-        destination: t.destination,
-        dateBegin: t.dateBegin,
-        dateEnd: t.dateBegin,
-        imageURL: t.imageURL,
-        places: t.places,
-        money: t.money,
-        description: t.description,
-        display: t.display,
-        rate: t.rate
-    });*/
-    
-  
   }
   
   @Output() addTour = new EventEmitter();
@@ -57,6 +40,7 @@ export class AddingComponent implements OnInit {
   dateSent2 = new Date;
 
   newTour: Tour = {
+      key: "",
       id: 1,
       name: '',
       destination: '',
@@ -103,7 +87,6 @@ export class AddingComponent implements OnInit {
   }
 
   
-
   onSubmit() {
     if (this.addingTripForm.valid) {
       //TODO
@@ -112,6 +95,7 @@ export class AddingComponent implements OnInit {
       console.log(typeof this.addingTripForm.value.dateBegin);
 
       this.addingService.createTour( {
+        key: "",
         id: this.addingService.getFreeID(),
         name: this.addingTripForm.value.name,
         destination: this.addingTripForm.value.destination,

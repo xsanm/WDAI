@@ -31,13 +31,13 @@ export class DetailsComponent implements OnInit {
   ngOnInit(): void {
     this.dbService.updateLocalCartList();
     this.route.params.subscribe(parameter => {
-      console.log(parameter);
+      //console.log(parameter);
       this.tourData = JSON.parse(parameter['tour']) as Tour;
       this.cartData = JSON.parse(parameter['cart']) as CartElement;
     })
-    console.log(this.tourData);
+    //console.log(this.tourData);
 
-    console.log(this.tourData.id);
+    //console.log(this.tourData.id);
 
     this.placesReserved = this.dbService.getCartElements(this.tourData.id);
     this.setButtons();
@@ -60,7 +60,7 @@ export class DetailsComponent implements OnInit {
   }
 
   incrementPlaces() {
-    console.log(this.placesReserved);
+    //console.log(this.placesReserved);
     this.dbService.updateLocalCartList();
     if(this.placesReserved < this.tourData.places) {
       this.placesReserved += 1;

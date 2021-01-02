@@ -22,10 +22,6 @@ export interface FilterRanges {
 })
 export class FliterComponent implements OnInit {
 
-
-  
-
-
   @Input() tours : Tour[] = [];
   @Output() useFilters = new EventEmitter();
 
@@ -57,20 +53,13 @@ export class FliterComponent implements OnInit {
       dateBeg: "" ,
       dateEnd: ""
     }
-    //console.log(dbService.getToursList());
-    /*this.dbService.getToursList().snapshotChanges().pipe(
-      map(changes => changes.map(c => ({key : c.payload.key, ...c.payload.val()})))
-    ).subscribe(tours =>{
-      this.tours = tours as Tour[];
-    });*/
+
     
   }
 
   setTours(tours: Tour[]) {
     this.tours = tours;
     this.countRanges();
-    //this.filters.minMoney = this.minMoney;
-    //this.filters.maxMoney = this.maxMoney;
   }
 
   countRanges() {
@@ -95,21 +84,16 @@ export class FliterComponent implements OnInit {
   deleteRanges() {
     this.destinations = [];
     this.ratings = [];
-    //this.dateBeg=  "";
-    //this.dateEnd = "";
     this.dateSent = new Date;
     this.dateSent2 = new Date;
     this.ngOnInit();
   }
   
   ngOnInit(): void {
-    //console.log(this.tours);
     this.countRanges();
     this.dateSent = new Date;
     this.dateSent2 = new Date;
-    //for(let t of this.tours) this.toursWithFilters.push(t.id);
-    //this.dbService.setFiltered(this.toursWithFilters);
-    console.log(this.tours);
+    //console.log(this.tours);
   }
 
   onDestinationFilterChange(e: any){
@@ -120,8 +104,6 @@ export class FliterComponent implements OnInit {
     } else {
       for(let i = 0; i < this.filters.destinations.length; i++) {
         if(this.filters.destinations[i] == dest) {
-          //console.log(tours[i]);
-          //delete tours[i];
           this.filters.destinations.splice(i, 1);
         }
       }
@@ -130,40 +112,8 @@ export class FliterComponent implements OnInit {
   }
 
   apllyFilters() {
-
     this.dbService.applyFilters(this.filters);
     this.useFilters.emit();
-    console.log("SIEMA");
-    return;
-
-    let tab: number[] =[];
-    this.toursWithFilters = [];
-    //console.log(this.choosedRatings, this.choosedDestinations);
-    //console.log(this.dateBeg, this.tours[0].dateBegin);
-    for(let t of this.tours) {
-      if((this.filters.destinations.length == 0 || this.filters.destinations.includes(t.destination)) &&
-        t.money >= this.filters.minMoney &&
-        t.money <= this.filters.maxMoney &&
-        (this.filters.ratings.length == 0  || this.filters.ratings.includes(t.rate)) &&
-        (this.filters.dateBeg == "" || new Date(t.dateBegin) >= new Date(this.filters.dateBeg)) &&
-        (this.filters.dateEnd == "" || new Date(t.dateEnd) <= new Date(this.filters.dateEnd))
-      
-      
-      ){
-        //t.display = true;
-        this.toursWithFilters.push(t.id);
-        tab.push(t.id);
-      } else {
-        //t.display = false;
-      }
-    }
-
-    this.dbService.setFiltered(this.toursWithFilters);
-
-    this.useFilters.emit();
-
-
-    //this.countRanges();
   }
 
   removeFilters() {

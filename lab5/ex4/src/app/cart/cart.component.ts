@@ -30,7 +30,6 @@ export class CartComponent implements OnInit {
 
   constructor(private cartSerivce: DbService) {
     
-
   }
 
   cartSum(){

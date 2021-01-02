@@ -10,6 +10,7 @@ import { CartElement } from '../cart/cart.component';
 export {Tour};
 
 interface Tour {
+  key: string,
   id: number,
   name: string,
   destination: string,
@@ -49,11 +50,13 @@ export class TourComponent implements OnInit {
   displayDeleteButton: boolean = true;
   tourRating: number = 1;
   tour!: TourData;
+  minPriceId = 0;
+  maxPriceId = 0;
 
 
   cartData!: CartElement;
 
-  constructor(private dbService: DbService, private cartSerivce: LocalService, private router: Router) {
+  constructor(public dbService: DbService, private cartSerivce: LocalService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -71,6 +74,9 @@ export class TourComponent implements OnInit {
       tour: this.tourData,
       cart: this.cartData
     }
+    this.minPriceId = this.dbService.getMostExpensiveID();
+    this.maxPriceId = this.dbService.getLeastExpensiveID();
+
   }
 
   setButtons() {

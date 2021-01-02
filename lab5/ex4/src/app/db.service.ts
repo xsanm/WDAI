@@ -13,12 +13,6 @@ import { tours } from './tours';
 })
 export class DbService {
   
-  
-  
-  
-  
-  
-  
 
   private toursPath = 'tours';
   private cartPath = 'cart';
@@ -54,14 +48,6 @@ export class DbService {
     for(let i = 0; i <= 30; i++) this.toursWithFilters.push(i);
   }
 
-
-  ifToDisplay(id:number){
-    //this.updateLocalTourList();
-    return true;
-    console.log(this.tours);
-    console.log(this.toursWithFilters);
-    return this.toursWithFilters.includes(id);
-  }
 
   applyFilters(filters: FilterRanges) {
     //console.log(filters);
@@ -140,8 +126,8 @@ export class DbService {
 
   addToCart(tour: CartElement, el: number): void {
     this.updateLocalCartList();
-    console.log(tour);
-    console.log(this.cart);
+    //console.log(tour);
+    //console.log(this.cart);
 
     for(let c of this.cart) {
       if(c.id === tour.id) {
@@ -173,9 +159,7 @@ export class DbService {
     
   }
 
-  ifInCart(tour: CartElement) {
-
-  }
+ 
 
   getCartElements(id: number) {
     this.updateLocalTourList();
@@ -193,7 +177,7 @@ export class DbService {
     this.updateLocalTourList();
     let id = 0;
     let mx = 0;
-    for(let t of this.tours) {
+    for(let t of this.tours) if(this.toursWithFilters.includes(t.id)){
       if(t.money > mx) {
         mx = t.money;
         id = t.id;
@@ -204,7 +188,7 @@ export class DbService {
   getMostExpensiveID() {
     let id = 0;
     let mx = 1000000000;
-    for(let t of this.tours) {
+    for(let t of this.tours) if(this.toursWithFilters.includes(t.id)) {
       if(t.money < mx) {
         mx = t.money;
         id = t.id;

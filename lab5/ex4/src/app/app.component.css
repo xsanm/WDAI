@@ -1,14 +1,4 @@
 
-#tours {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
-}
-
-#shop {
-    display: flex;
-    flex-wrap: wrap;
-}
 
 .navbar {
     width: 100%;

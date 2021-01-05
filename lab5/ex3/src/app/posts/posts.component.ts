@@ -10,9 +10,9 @@ import { Post } from './post';
 })
 export class PostsComponent implements OnInit {
 
-  posts: Post[];
+  posts!: Post[];
 
-  newPost: Post;
+  newPost!: Post;
 
 
   constructor(
@@ -37,7 +37,7 @@ export class PostsComponent implements OnInit {
       title: a,
       body: b
     };
-    console.log(this.postService.addPost(this.newPost));
+    //console.log(this.postService.addPost(this.newPost));
     this.posts.unshift(this.newPost);
   }
 

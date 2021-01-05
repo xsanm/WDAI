@@ -25,15 +25,11 @@ export class CustomerService {
 
   createCustomer(customer: Student): void {
     this.customersRef.add({...customer});
-    //this.customersRef.push({...customer})
-    //console.log(customer);
-    //console.log(this.customersRef.valueChanges());
+
   }
 
   updateCustomer(key: string, value: any) {
     this.customersRef.doc(key).update(value);
-    //this.customersRef.update(key, value);
-    //console.log(key);
   } 
 
   deleteCustomer(key: string) {
@@ -41,9 +37,6 @@ export class CustomerService {
   }
 
   getCustomersList()  {
-    
-    //this.daneRef = this.baza.list('students').snapshotChanges();
-    //console.log(this.baza.list);
     return this.customersRef;
   }
 

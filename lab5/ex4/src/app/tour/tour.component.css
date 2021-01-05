@@ -49,7 +49,6 @@
 
 #buttons > button{
     margin: 10px;
-    width: 30px;
     height: 30px;
     border-radius: 20%;
 }
@@ -72,21 +71,24 @@
 
 #btnDel {
     border: none;
+    width: 30px;
     background-color: #b43131;
 }
 #btnAdd {
     border: none;
+    width: 30px;
     background-color: #24a02e;
 }
 #btnOdd {
     border: none;
+    width: 30px;
     background-color: #20a5c7;
 }
 .top-section1 {
     background-color: red;
 }
 #btnDetails {
-    width: 300px;
+    width: 60px;
     background-color: #caa232;
 }
 .top-section2 {

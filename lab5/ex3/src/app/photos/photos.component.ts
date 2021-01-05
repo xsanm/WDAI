@@ -9,7 +9,7 @@ import { Photo } from './photo';
 })
 export class PhotosComponent implements OnInit {
 
-  photos: Photo[];
+  photos!: Photo[];
   constructor(
     private photosService: HolderService
   ) { }

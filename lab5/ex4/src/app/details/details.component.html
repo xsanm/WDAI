@@ -1,9 +1,9 @@
 <p>details works!</p>
-
+<p>with time, this page will be upgraded</p>
 
 
 <div id="content">
-    <div id="top-section"> 
+    <div id="top-section" class = "top-section3"> 
         <p>Name: {{tourData.name }}</p>
         <app-rating (setRate)="setRate($event)" [rateVal]="tourData.rate"></app-rating>
     </div>
@@ -18,7 +18,7 @@
         </div>
     </div>   
     <div id="places-sections">
-        <p>Places: {{tour}}/{{tourData.places}}</p>
+        <p>Places: {{placesReserved}}/{{tourData.places}}</p>
         <div *ngIf="tourData.places - placesReserved == 1" id="lastPlace">
             Last free place!
         </div>

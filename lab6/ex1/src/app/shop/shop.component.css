@@ -1,0 +1,12 @@
+
+#tours {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+#shop {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 100px;
+}

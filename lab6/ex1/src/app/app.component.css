@@ -1,0 +1,150 @@
+
+
+.navbar {
+    width: 100%;
+    height: 100px;;
+    background-color: #0B0C10;
+    color: white;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.logo {
+    width: 200px;
+    height: 20px;
+    position: relative;
+    top: 15px;
+    padding: 20px 20px 20px 20px;
+    float: left;
+    margin-left: 3%;
+    text-decoration: none;
+    font-weight: bolder;
+    color:  #66FCF1;
+    font-size: 30px;;
+    letter-spacing: 3px;
+}
+
+.logo:hover {
+    color: #66FCF1;
+}
+
+.menuBig {
+    width: 550px;
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    float: right;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-right: 15px;
+    margin-left: 15px;
+    text-decoration: none;
+    list-style: none;
+    text-align: center;
+}
+
+.menuBig li
+{
+  padding: 10px 0;
+  font-size: 22px;
+}
+
+.menuBig a {
+    text-decoration: none;
+    color: #C5C6C7;
+    transition: color 0.3s ease;
+}
+
+.menuBig a:hover
+{
+  color: #66FCF1;
+  text-decoration: underline;
+}
+
+.menuBig > a > li {
+    display: flex;
+}
+
+.menuBig > a {
+    text-decoration: none;
+    margin: 1%;
+    
+    flex-grow: 1;
+}
+
+.menu input{
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .menu input{
+        display: block;
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        top: 30px;
+        right: 50px;
+        opacity: 0;
+        z-index: 2;
+        cursor: pointer;
+    }
+    .menu input:not(:checked)~.menuBig {
+        visibility: hidden;
+    }
+    .menu input:checked~.menuBig {
+        margin: 0;
+        position: absolute;
+        top: 100px;
+        right: 0;
+        width: 100%;
+        background-color: #0B0C10;
+        color: #C5C6C7;;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        transition: all 1s;
+    }
+
+
+
+    .bar1, .bar2, .bar3 {
+        position: absolute;
+        width: 40px;
+        height: 5px;
+        background-color: #C5C6C7;
+        margin: 6px 0;
+        transition: 0.4s;
+        z-index: 1;
+      }
+
+    .bar1 {
+        top: 30px;
+        right: 50px;
+    }
+    .bar2 {
+        top: 40px;
+        right: 50px;
+    }
+    .bar3 {
+        top: 50px;
+        right: 50px;
+    }
+    .menu input:checked~.bar1{
+        transform: rotate(-45deg) translate(-7px, 6px);   
+    }
+    .menu input:checked~.bar2{
+        opacity: 0;
+    }
+    .menu input:checked~.bar3{
+        transform: rotate(45deg) translate(-8px, -8px);   
+    }
+}
+
+@media (max-width: 300px) {
+    .logo{
+        display: none;
+    }
+}

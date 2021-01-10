@@ -1,0 +1,106 @@
+
+<form novalidate [formGroup]="addingTripForm" (submit)="onSubmit()">
+    <div>
+        <label>Tour Name:</label><br>
+        <input class="center-input" 
+            id="name" 
+            name="name" 
+            formControlName="name">
+        <div *ngIf="name.invalid &&  name.touched"
+            class="alert"> You need specify tour Name </div>
+    </div>
+    
+    <div>
+        <label>Destination:</label><br>
+        <input class="center-input" 
+            name="destination" 
+            formControlName="destination">
+        <div *ngIf="destination.invalid &&  destination.touched"
+            class="alert alert-danger"> You need specify tour Destination </div>
+    </div>
+    
+    
+    <div>
+        <label>Begin of the trip:</label><br>
+        <input class="center-input"  
+            type="date" 
+            name="dateBegin" 
+            (change)="dateBeginChange($event)"
+            formControlName="dateBegin" 
+            min="{{dateSent|date:'yyyy-MM-dd'}}" 
+            max="{{addingTripForm.value.dateEnd|date:'yyyy-MM-dd'}}" 
+            placeholder="dd.mm.yyyy">
+        <div *ngIf="dateBegin.invalid && dateBegin.touched"
+            class="alert alert-danger">
+            <div *ngIf="dateBegin.errors?.required"> Begin Date is required. </div>
+        </div>
+    </div>
+    
+    
+    <div>
+        <label>End of the trip:</label><br>
+        <input class="center-input" 
+            type="date" 
+            name="dateEnd" 
+            formControlName="dateEnd" 
+            min="{{dateSent2|date:'yyyy-MM-dd'}}" 
+            placeholder="dd.mm.yyyy">
+        <div *ngIf="dateEnd.invalid && dateEnd.touched"
+            class="alert alert-danger">
+            <div *ngIf="dateEnd.errors?.required"> End Date is required. </div>
+            <div *ngIf="dateEnd.errors?.invalidDateEnd"> End Date must can't be from past</div>
+        </div>
+    </div>
+    
+    
+    
+    <div>
+        <label>Price:</label><br>
+        <input  class="center-input" 
+        type="number" 
+        name="price" 
+        formControlName="price">
+
+        <div *ngIf="price.invalid && price.touched"
+            class="alert alert-danger">
+            <div *ngIf="price.errors?.required"> Price is required. </div>
+            <div *ngIf="price.errors?.min"> Price must be additional</div>
+        </div>
+    </div>
+    
+    
+    <div>
+        <label>Places:</label><br>
+        <input class="center-input" 
+            type="number" 
+            name="places" 
+            formControlName="places">
+        <div *ngIf="places.invalid && places.touched"
+            class="alert alert-danger">
+            <div *ngIf="places.errors?.required"> Number of places is required. </div>
+            <div *ngIf="places.errors?.min"> Number of places must be additional</div>
+        </div>
+    </div>
+    
+    
+    <div>
+        <label>Description:</label><br>
+        <textarea class="center-input" 
+        name="description" 
+        cols="25" 
+        rows="10" 
+        formControlName="description"></textarea>
+        <div *ngIf="description.invalid &&  description.touched"
+            class="alert alert-danger"> Description can't be empty </div>
+    </div>
+    
+    <div>
+        <label>ImageUrl:</label><br>
+        <input class="center-input" 
+            name="imageUrl" 
+            formControlName="imageUrl">
+    </div>
+    
+ 
+    <button class="btn1" type="submit" [disabled]="!addingTripForm.valid" >SUBMIT</button>
+</form>

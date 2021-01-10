@@ -1,0 +1,68 @@
+<p id="t">Filters</p>
+
+
+<div id="filtr-div">
+
+    
+    <div class="filter">
+        <p>Wybierz cel podrozy</p>
+       
+            <li *ngFor="let topping of destinations" [value]="topping">{{topping}}
+                <input type="checkbox" [name]="topping" (change)="onDestinationFilterChange($event)">
+            </li>
+    </div>
+
+    <div class="filter">
+        <p>Wybierz min cene podrozy</p>
+
+        {{minMoney}}<input type="range" min="{{minMoney}}" max="{{this.filters.maxMoney}}" value="{{minMoney}}" (input)="changeMinMoney($event)">{{this.filters.maxMoney}}
+      <br><div id="r"> {{this.value1}}</div> 
+    </div>
+    <div class="filter">
+        <p>Wybierz max cene podrozy</p>
+
+        {{this.filters.minMoney}}<input type="range" min="{{this.filters.minMoney}}" max="{{maxMoney}}" value="{{maxMoney}}" (input)="changeMaxMoney($event)">{{maxMoney}}
+      <br><div id="r"> {{this.value2}}</div> 
+    </div>
+
+
+    <div class="filter"id="rate">
+        <p>Wybierz ocene podrozy</p>
+        <li> <div class="div1"></div> <input type="checkbox" [disabled]="!ratings.includes(1)" (change)="selectRating($event, 1)"></li>
+        <li> <div class="div1"></div><div class="div1"></div> <input type="checkbox" [disabled]="!ratings.includes(2)"(change)="selectRating($event, 2)"></li>
+        <li> <div class="div1"></div><div class="div1"></div><div class="div1"></div><input type="checkbox" [disabled]="!ratings.includes(3)"(change)="selectRating($event, 3)"></li>
+        <li><div class="div1"></div><div class="div1"></div><div class="div1"></div><div class="div1"></div> <input type="checkbox"[disabled]="!ratings.includes(4)" (change)="selectRating($event, 4)"></li>
+        <li><div class="div1"></div><div class="div1"></div><div class="div1"></div><div class="div1"></div><div class="div1"></div><input type="checkbox" [disabled]="!ratings.includes(5)"(change)="selectRating($event, 5)"> </li>
+        <li> <div class="div1"></div><div class="div1"></div><div class="div1"></div><div class="div1"></div><div class="div1"></div><div class="div1"></div><input type="checkbox"[disabled]="!ratings.includes(6)" (change)="selectRating($event, 6)"></li>
+    </div>
+
+    <div class="filter">
+        <p>Wybierz date poczatku</p>
+
+        <input class="center-input" 
+            type="date" 
+            name="dateEnd" 
+            min="{{dateSent|date:'yyyy-MM-dd'}}" 
+            max="{{this.filters.dateEnd|date:'yyyy-MM-dd'}}" 
+            (change)="dateBeginChange($event)"
+            placeholder="dd.mm.yyyy">
+    </div>
+
+    <div class="filter">
+        <p>Wybierz date konca</p>
+
+
+        <input class="center-input" 
+            type="date" 
+            name="dateEnd" 
+            min="{{dateSent2|date:'yyyy-MM-dd'}}" 
+            (change)="dateEndChange($event)"
+            placeholder="dd.mm.yyyy">
+    </div>
+
+</div>
+
+
+<br>
+
+<button (click)="removeFilters()">usun filtr</button>

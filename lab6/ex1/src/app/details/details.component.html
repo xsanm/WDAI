@@ -1,0 +1,37 @@
+<p>details works!</p>
+<p>with time, this page will be upgraded</p>
+
+
+<div id="content">
+    <div id="top-section" class = "top-section3"> 
+        <p>Name: {{tourData.name }}</p>
+        <app-rating (setRate)="setRate($event)" [rateVal]="tourData.rate"></app-rating>
+    </div>
+    <div id="info-sections">
+        <img src="{{tourData.imageURL}}" alt="photo">
+        <div id="info">
+            <p>Destination: {{tourData.destination}}</p>
+            <p>Data rozpoczęcia: {{tourData.dateBegin}}</p>
+            <p>Data zakoczenia: {{tourData.dateEnd}}</p>
+            <p>Opis</p>
+            <p>{{tourData.description}}</p>
+        </div>
+    </div>   
+    <div id="places-sections">
+        <p>Places: {{placesReserved}}/{{tourData.places}}</p>
+        <div *ngIf="tourData.places - placesReserved == 1" id="lastPlace">
+            Last free place!
+        </div>
+        <div *ngIf="tourData.places - placesReserved == 0" id="noPlace">
+            No places availalble!
+        </div>
+    </div>
+    <div id="bottom-section">
+        <p>Price: {{tourData.money | currency}}</p>
+        <div id=buttons>
+            <button id="btnAdd"(click)="incrementPlaces()" [style.visibility]="displayPlusButton ? 'visible' : 'hidden'">+</button>
+            <button id="btnOdd" (click)="decrementPlaces()" [style.visibility]="displayMinusButton ? 'visible' : 'hidden'">-</button>
+            
+        </div>
+    </div>
+    

@@ -1,1 +1,59 @@
 <p>register works!</p>
+<div class="example-container">
+    <mat-card-title>Register</mat-card-title><br><br>
+    
+    <mat-form-field appearance="fill">
+      <mat-label>Enter your email</mat-label>
+      <input matInput placeholder="pat@example.com" [formControl]="email" required>
+      <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+    </mat-form-field>
+    <br>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Enter your username</mat-label>
+        <input matInput [formControl]="userName" required>
+        <mat-error *ngIf="userName.invalid">{{getErrorMessage()}}</mat-error>
+    </mat-form-field>
+    <br>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Enter your Firstname</mat-label>
+        <input matInput [formControl]="firstName" required>
+        <mat-error *ngIf="firstName.invalid">{{getErrorMessage()}}</mat-error>
+    </mat-form-field>
+    <br>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Enter your Lastname</mat-label>
+        <input matInput [formControl]="lastName" required>
+        <mat-error *ngIf="lastName.invalid">{{getErrorMessage()}}</mat-error>
+    </mat-form-field>
+    <br>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Enter your password</mat-label>
+        <input matInput  [type]="hide ? 'password' : 'text'" [formControl]="pass1">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide"  >
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        
+        </button>
+        <mat-error *ngIf="pass1.invalid">{{getErrorMessage()}}</mat-error>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+        <mat-label>Confirm your password</mat-label>
+        <input matInput  [type]="hide ? 'password' : 'text'" [formControl]="pass2">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide"  >
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        
+        </button>
+        <mat-error *ngIf="pass2.invalid">{{getErrorMessage()}}</mat-error>
+    </mat-form-field>
+    <br>
+
+
+    <button mat-raised-button color="primary" (click)="register()" [disabled]="checkValidData()" >REGISTER</button>
+    <br><br><br>
+    <p>Already have account? <button mat-raised-button (click)="login()" color="primary">Log in</button> </p>
+    <br>
+  </div>

@@ -11,8 +11,9 @@
           <a routerLink="adding-component" routerLinkActive="active"><li>Add Tour</li></a>
           <a routerLink="cart-component" routerLinkActive="active"><li>Cart</li></a>
           
-          <button mat-button (click)="login()">Loginin</button>
-          <button mat-button (click)="register()">Register</button>
+          <button mat-button *ngIf="ifLogged()" (click)="login()" >Loginin</button>
+          <button mat-button  *ngIf="ifLogged()" (click)="register()">Register</button>
+          <button mat-button  *ngIf="!ifLogged()" (click)="logout()">Logut</button>
       </ul>
   </div>
 </nav>

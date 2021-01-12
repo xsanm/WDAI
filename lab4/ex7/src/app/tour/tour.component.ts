@@ -28,7 +28,7 @@ export class TourComponent implements OnInit {
 
 
   
-  @Input() tourData: Tour;
+  @Input() tourData!: Tour;
   @Input() maxPriceId: number = 0;
   @Input() minPriceId: number = 0;
   @Output() addTourToBasket = new EventEmitter();

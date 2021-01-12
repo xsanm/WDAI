@@ -30,6 +30,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatButtonModule} from '@angular/material/button';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import {MatButtonModule} from '@angular/material/button';
     MatDialogModule,
     MatIconModule,
     MatCheckboxModule,
-    MatButtonModule
+    MatButtonModule,
+    AngularFireAuthModule     
   ],
   providers: [],
   bootstrap: [AppComponent]

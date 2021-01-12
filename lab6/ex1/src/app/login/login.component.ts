@@ -4,6 +4,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatDialog } from '@angular/material/dialog';
 import { RegisterComponent } from '../register/register.component';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +14,7 @@ import { RegisterComponent } from '../register/register.component';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, private auth: AuthService) { }
   hide = true;
   login = "";
 
@@ -35,8 +37,20 @@ export class LoginComponent implements OnInit {
 
   signin() {
     console.log("sign in");
-    console.log(this.email.value);
-    console.log(this.pass.value);
+
+
+    this.auth.login(this.email.value, this.pass.value).catch(err => console.log(err.message));
+
+    /*this.angularFireAuth.signIn
+    autWithEmailAndPassword(this.email.value, this.pass.value)
+      .then((user) => {
+        console.log("zalogowano");
+      })
+  .catch((error) => {
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    // ..
+  });*/
   }
 
   register() {

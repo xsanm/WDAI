@@ -52,7 +52,7 @@
     <br>
 
 
-    <button mat-raised-button color="primary" (click)="register()" [disabled]="checkValidData()" >REGISTER</button>
+    <button mat-raised-button color="primary" (click)="register()" [disabled]="!checkValidData()" >REGISTER</button>
     <br><br><br>
     <p>Already have account? <button mat-raised-button (click)="login()" color="primary">Log in</button> </p>
     <br>

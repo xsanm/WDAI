@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { AuthService } from '../auth.service';
 import { LoginComponent } from '../login/login.component';
 
 @Component({
@@ -10,7 +12,7 @@ import { LoginComponent } from '../login/login.component';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, private auth: AuthService) { }
   hide = true;
 
   ngOnInit(): void {
@@ -35,9 +37,23 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    console.log("sign in");
+    console.log("register in");
+
+
+    this.auth.register(this.email.value, this.pass1.value).catch(err => console.log(err.message));
+    /*console.log("register in");
     console.log(this.email.value);
     console.log(this.pass1.value);
+    this.angularFireAuth.createUserWithEmailAndPassword(this.email.value, this.pass1.value)
+      .then((user) => {
+        console.log("zarejestrowano");
+      })
+  .catch((error) => {
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    // ..
+  });*/
+
   }
 
   checkValidData() {

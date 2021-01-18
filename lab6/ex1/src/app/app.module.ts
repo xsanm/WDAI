@@ -31,6 +31,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatButtonModule} from '@angular/material/button';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { UserpanelComponent } from './userpanel/userpanel.component';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,8 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
     ShopComponent,
     DetailsComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    UserpanelComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +67,8 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
     MatIconModule,
     MatCheckboxModule,
     MatButtonModule,
-    AngularFireAuthModule     
+    AngularFireAuthModule   ,
+    MatSelectModule  
   ],
   providers: [],
   bootstrap: [AppComponent]

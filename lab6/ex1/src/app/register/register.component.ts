@@ -39,20 +39,7 @@ export class RegisterComponent implements OnInit {
   register() {
     console.log("register in");
 
-
     this.auth.register(this.email.value, this.pass1.value).catch(err => console.log(err.message));
-    /*console.log("register in");
-    console.log(this.email.value);
-    console.log(this.pass1.value);
-    this.angularFireAuth.createUserWithEmailAndPassword(this.email.value, this.pass1.value)
-      .then((user) => {
-        console.log("zarejestrowano");
-      })
-  .catch((error) => {
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    // ..
-  });*/
 
   }
 

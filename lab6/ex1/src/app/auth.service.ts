@@ -14,7 +14,10 @@ export interface Credentials {
 })
 export class AuthService {
 
+  userData: Observable<any>;
+
   constructor(private fireAuth: AngularFireAuth) {
+    this.userData = fireAuth.authState;
     fireAuth.authState.subscribe( auth => {
       if(auth) {
         console.log('logged-id');
@@ -44,8 +47,16 @@ export class AuthService {
     return this.fireAuth.signOut();
   }
 
+  setPersistance(s: string): void{
+    this.fireAuth.setPersistence(s);
+  }
+
   getLogged() {
-    return this.fireAuth.authState; 
+    return this.userData; 
+  }
+
+  getUser(){
+    return this.fireAuth.currentUser;
   }
 
 }

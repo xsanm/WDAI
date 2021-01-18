@@ -1,0 +1,13 @@
+<p>userpanel works!</p>
+<div class="form-wrapper">
+      <mat-form-field class="modelForm" appearance="fill" #pers>
+        <mat-label>Type of Persistence</mat-label>
+        <mat-select [(ngModel)]="persValue">
+          <mat-option [value]="'Local'">Local</mat-option>
+          <mat-option  [value]="'session'">Session</mat-option>
+          <mat-option [value]="'none'">None</mat-option>
+        </mat-select>
+      </mat-form-field><br>
+  
+      <button mat-raised-button color="accent" (click)="setPersistence(persValue)">Change</button>
+  </div>
